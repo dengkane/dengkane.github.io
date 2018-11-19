@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="缓存 cache," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="缓存技术是目前很常用的一种技术，当你的系统的并发访问到达一定数量级后，后台的数据库就难以应付了，需要考虑缓存技术，但缓存又会涉及到如何跟数据库保持数据同步的问题。这篇文章介绍一个基于 Groovy 闭包技术实现的低侵入方案。 基本设计思路读取数据时优先从缓存读取，缓存没有时从数据库读取，同时写到缓存中，隔一定时间后触发缓存刷新。 实现说明定义一个统一的服务方法这个服务方法能同时完成基本设计思路里的">
+<meta name="keywords" content="缓存 cache">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个基于 Groovy 闭包实现的低侵入缓存设计">
 <meta property="og:url" content="http://yoursite.com/2018/10/26/一个基于-Groovy-闭包实现的低侵入缓存设计/index.html">
 <meta property="og:site_name" content="Technology and Investing Blog">
 <meta property="og:description" content="缓存技术是目前很常用的一种技术，当你的系统的并发访问到达一定数量级后，后台的数据库就难以应付了，需要考虑缓存技术，但缓存又会涉及到如何跟数据库保持数据同步的问题。这篇文章介绍一个基于 Groovy 闭包技术实现的低侵入方案。 基本设计思路读取数据时优先从缓存读取，缓存没有时从数据库读取，同时写到缓存中，隔一定时间后触发缓存刷新。 实现说明定义一个统一的服务方法这个服务方法能同时完成基本设计思路里的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-26T03:09:31.000Z">
+<meta property="og:updated_time" content="2018-11-19T01:40:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个基于 Groovy 闭包实现的低侵入缓存设计">
 <meta name="twitter:description" content="缓存技术是目前很常用的一种技术，当你的系统的并发访问到达一定数量级后，后台的数据库就难以应付了，需要考虑缓存技术，但缓存又会涉及到如何跟数据库保持数据同步的问题。这篇文章介绍一个基于 Groovy 闭包技术实现的低侵入方案。 基本设计思路读取数据时优先从缓存读取，缓存没有时从数据库读取，同时写到缓存中，隔一定时间后触发缓存刷新。 实现说明定义一个统一的服务方法这个服务方法能同时完成基本设计思路里的">
@@ -190,6 +191,36 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -272,6 +303,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -332,6 +385,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/缓存-cache/" rel="tag"># 缓存 cache</a>
+          
+        </div>
       
 
       
@@ -444,7 +503,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>
