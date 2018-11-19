@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,七天学会Python编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="8.1 数据分析是什么？数据分析是根据一些分析方法对数据进行计算、汇总等操作，输出比较有价值的结果。 比如我们有了一个班级所有学生的全部科目的考试成绩，就可以做各种数据分析了，我们可以计算一下每科所有学生的平均分，也可以计算每个学生所有科目的总分和平均分，可以排列总分名次，也可以排列平均分名次。 进一步可以对某科目的分数段做统计，统计出90分到100分有多少个学生，低于60分的有多少个学生。 这里">
+<meta name="keywords" content="Python,七天学会Python编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七天学会Python编程 -- 第八章 数据分析">
+<meta property="og:url" content="http://yoursite.com/2018/11/19/七天学会Python编程-08-第八章-数据分析/index.html">
+<meta property="og:site_name" content="Technology and Investing Blog">
+<meta property="og:description" content="8.1 数据分析是什么？数据分析是根据一些分析方法对数据进行计算、汇总等操作，输出比较有价值的结果。 比如我们有了一个班级所有学生的全部科目的考试成绩，就可以做各种数据分析了，我们可以计算一下每科所有学生的平均分，也可以计算每个学生所有科目的总分和平均分，可以排列总分名次，也可以排列平均分名次。 进一步可以对某科目的分数段做统计，统计出90分到100分有多少个学生，低于60分的有多少个学生。 这里">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-19T05:54:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七天学会Python编程 -- 第八章 数据分析">
+<meta name="twitter:description" content="8.1 数据分析是什么？数据分析是根据一些分析方法对数据进行计算、汇总等操作，输出比较有价值的结果。 比如我们有了一个班级所有学生的全部科目的考试成绩，就可以做各种数据分析了，我们可以计算一下每科所有学生的平均分，也可以计算每个学生所有科目的总分和平均分，可以排列总分名次，也可以排列平均分名次。 进一步可以对某科目的分数段做统计，统计出90分到100分有多少个学生，低于60分的有多少个学生。 这里">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/19/七天学会Python编程-08-第八章-数据分析/"/>
+
+
+
+
+
+  <title>七天学会Python编程 -- 第八章 数据分析 | Technology and Investing Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Technology and Investing Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/七天学会Python编程-08-第八章-数据分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">七天学会Python编程 -- 第八章 数据分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T13:50:37+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/19/七天学会Python编程-08-第八章-数据分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/19/七天学会Python编程-08-第八章-数据分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="8-1-数据分析是什么？"><a href="#8-1-数据分析是什么？" class="headerlink" title="8.1 数据分析是什么？"></a>8.1 数据分析是什么？</h2><p>数据分析是根据一些分析方法对数据进行计算、汇总等操作，输出比较有价值的结果。</p>
+<p>比如我们有了一个班级所有学生的全部科目的考试成绩，就可以做各种数据分析了，我们可以计算一下每科所有学生的平均分，也可以计算每个学生所有科目的总分和平均分，可以排列总分名次，也可以排列平均分名次。</p>
+<p>进一步可以对某科目的分数段做统计，统计出90分到100分有多少个学生，低于60分的有多少个学生。</p>
+<p>这里只是举了个实际中可能用到的例子，可以根据需要做多种个性化分析。</p>
+<p>分析数据来源可以是一个表格数据文件，也可以是数据库，或者其他来源。</p>
+<p>主要过程就是：加载源数据 -&gt; 根据需要做数据统计运算 -&gt; 输出统计结果。</p>
+<h2 id="8-2-一个有趣的分析案例"><a href="#8-2-一个有趣的分析案例" class="headerlink" title="8.2 一个有趣的分析案例"></a>8.2 一个有趣的分析案例</h2><p>我们通过一个有趣的案例来深入讲解一下，比如我们拿到这样的记录一个城市天气状况的源数据文件，是 CSV 格式的，可以用 Excel 打开浏览。</p>
+<p>Date,Type Of Weather,Average Temperature</p>
+<p>2015-1-1,Sunny,8</p>
+<p>2015-1-2,Sunny,9</p>
+<p>2015-1-3,Cloudy,8</p>
+<p>2015-1-4,Rainy,7</p>
+<p>…</p>
+<p>2015-12-31, Sunny, 10</p>
+<p>这个文件记录了日期、天气类型、平均气温这3个数据，每天一条记录，包含了 2015 年一年的数据，我们现在通过程序做几个分析，一个分析是统计一下 Sunny 天气总共有多少天，Cloudy 天气总共有多少天，和 Rainy 天气总共有多少天。</p>
+<p>首先我们要读取文件内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file = open(<span class="string">"weather2015.csv"</span>, <span class="string">"r"</span>)</span><br></pre></td></tr></table></figure>
+<p>然后读取整个文件内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileContent = file.read()</span><br></pre></td></tr></table></figure>
+<p>然后要解析数据，因为现在读到的是整个文件所有数据，都放在一个大字符串 fileContent 里了。</p>
+<p>现在学一个字符串的方法 split，是按某个字符拆分一个字符串成一个列表，现在 fileContent 里的大字符串是用回车符号 \n 分割成各行，每行又用逗号 , 分割成多列，我们先用 split 方法来拆分每行数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lines = fileContent.split(<span class="string">"\n"</span>)</span><br></pre></td></tr></table></figure>
+<p>split 方法是属于字符串对象 fileContent 的，它需要一个分割字符做参数，拆分后的列表返回给 lines 变量。</p>
+<p>下面再拆分每行，需要用循环遍历 lines 中每行，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rows = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    rowData = line.split(<span class="string">","</span>)</span><br><span class="line">    rows.append(rowData)</span><br></pre></td></tr></table></figure>
+<p>上面代码先定义了一个列表 rows，用于保存拆分后的每行列表对象，然后循环遍历 lines 列表，对每行字符串再使用 split 方法，这次是用逗号 , 做参数，把拆分完的列表追加到 rows 列表中，最后 rows 中的数据是这样的：</p>
+<p>[ [“2015-1-1”, “Sunny”, “8” ], [“2015-1-2”, “Sunny”, “9” ], … ]</p>
+<p>现在才开始进入数据分析阶段，前面我们做的都是数据加载方面的处理。</p>
+<p>数据统计分析需要用到字典类型对象了，这次我们要统计 Sunny 天气类型在一年内有多少天，我们可以定义一个字典类型对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results = &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>空的大花号就表示一个空的字典对象，我们把这个字典对象赋予 results 这个变量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results[<span class="string">"Sunny"</span>] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>这样就在字典对象里增加一个数据，Key 是 “Sunny”，对应的数据是 0，我们可以用这样的方式改变 Key 对应的数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results[<span class="string">"Sunny"</span>] = results[<span class="string">"Sunny"</span>] + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这行代码是把 “Sunny” 这个 Key 对应的数值加1，运行后 results[“Sunny”] 的数据变成 1，以前是 0，加 1 就变成 1.</p>
+<p>我们就是用这种思路来统计数据中 “Sunny” 的天气天数，也就是遍历那些从文件中加载的数据，每当碰到 “Sunny” 类型的天气，就把 results[“Sunny”] 加 1，循环遍历完后 results[“Sunny”] 就保存了 “Sunny” 天气的天数。下面看一下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">results[<span class="string">"Sunny"</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">    <span class="keyword">if</span> row[<span class="number">1</span>] == <span class="string">"Sunny"</span>:</span><br><span class="line">        results[<span class="string">"Sunny"</span>] = results[<span class="string">"Sunny"</span>] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(results[<span class="string">"Sunny"</span>])</span><br></pre></td></tr></table></figure>
+<p>上面代码是遍历我们前面已经加载好的数据，每行数据都是一个列表，其中第二个数据是天气类型，就判断这个天气类型是否是 “Sunny”，如果是就把 results[“Sunny”] 加 1。遍历完毕后就计算好了 “Sunny” 天气的天数，现在我们再把 “Cloudy” 和 “Rainy” 天气的天数也计算一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">results[<span class="string">"Sunny"</span>] = <span class="number">0</span></span><br><span class="line">results[<span class="string">"Cloudy"</span>] = <span class="number">0</span></span><br><span class="line">results[<span class="string">"Rainy"</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">    <span class="keyword">if</span> row[<span class="number">1</span>] == <span class="string">"Sunny"</span>:</span><br><span class="line">        results[<span class="string">"Sunny"</span>] = results[<span class="string">"Sunny"</span>] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> row[<span class="number">1</span>] == <span class="string">"Cloudy"</span>:</span><br><span class="line">        results[<span class="string">"Cloudy"</span>] = results[<span class="string">"Cloudy"</span>] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> row[<span class="number">1</span>] == <span class="string">"Rainy"</span>:</span><br><span class="line">        results[<span class="string">"Rainy"</span>] = results[<span class="string">"Rainy"</span>] + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(results)</span><br></pre></td></tr></table></figure>
+<p>现在那几种天气类型的天数都计算出来。</p>
+<p>现在我们改进一下程序，如果我们要计算的天气类型有很多种，我们预先也不知道有哪几种，但我们需要统计出来有几种，而且每种有多少天。</p>
+<p>这就需要用到字段对象的一个长处了，我们可以先不用定义各个 Key 及对应的初始值，我们可以直接在循环里用那个天气类型作为 Key 值，并做加 1 处理，下面看一下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">results = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">    <span class="keyword">if</span> row[<span class="number">1</span>] <span class="keyword">in</span> results:</span><br><span class="line">        results[ row[<span class="number">1</span>] ] = results[ row[<span class="number">1</span>] ] + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        results[ row[<span class="number">1</span>] ] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">print( results )</span><br></pre></td></tr></table></figure>
+<p>现在代码是不是比较清爽，我们分析一下，一开始先定义一个字段对象，赋给变量 results，然后遍历加载的数据，判断每行中的天气类型那个数据有没有在 results 这个字段对象的 Key 里，如果有，就直接加 1，如果没有就初始化为 0，为后面加 1 做准备。最后打印出统计结果。</p>
+<p>现在我们把上面几部分代码放到一起：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">file = open(<span class="string">"weather2015.csv"</span>, <span class="string">"r"</span>)</span><br><span class="line"></span><br><span class="line">fileContent = file.read()</span><br><span class="line">lines = fileContent.split(<span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">rows = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    rowData = line.split(<span class="string">","</span>)</span><br><span class="line">    rows.append(rowData)</span><br><span class="line"></span><br><span class="line">results = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">    <span class="keyword">if</span> row[<span class="number">1</span>] <span class="keyword">in</span> results:</span><br><span class="line">        results[ row[<span class="number">1</span>] ] = results[ row[<span class="number">1</span>] ] + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        results[ row[<span class="number">1</span>] ] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">print( results )</span><br></pre></td></tr></table></figure>
+<h2 id="8-3-实践练习时间"><a href="#8-3-实践练习时间" class="headerlink" title="8.3 实践练习时间"></a>8.3 实践练习时间</h2><p>过去章节我们学习了数据分析相关内容，下面通过实践练习来理解。</p>
+<p>练习1：</p>
+<p>仿照前面章节的数据分析例子，写一个程序，统计一下那一年内的数据中各个平均温度都有多少天？统计出来的结果可能是这样的：</p>
+<p>results[8] = 25</p>
+<p>results[9] = 93</p>
+<p>results[10] = 101</p>
+<p>…</p>
+<p>数据文件自己建一个，类似这样格式：</p>
+<p>Date,Type Of Weather,Average Temperature</p>
+<p>2015-1-1,Sunny,8</p>
+<p>2015-1-2,Sunny,9</p>
+<p>2015-1-3,Cloudy,8</p>
+<p>2015-1-4,Rainy,7</p>
+<p>…</p>
+<p>2015-12-31, Sunny, 10</p>
+<p>不需要一年365天都有，有一部分就可以。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/七天学会Python编程/" rel="tag"># 七天学会Python编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/七天学会Python编程-07-第七章-模块/" rel="next" title="七天学会Python编程 -- 第七章 模块">
+                <i class="fa fa-chevron-left"></i> 七天学会Python编程 -- 第七章 模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/19/七天学会Python编程-09-第九章-Web开发/" rel="prev" title="七天学会Python编程 -- 第九章 Web开发">
+                七天学会Python编程 -- 第九章 Web开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ken Deng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-数据分析是什么？"><span class="nav-number">1.</span> <span class="nav-text">8.1 数据分析是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-一个有趣的分析案例"><span class="nav-number">2.</span> <span class="nav-text">8.2 一个有趣的分析案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-实践练习时间"><span class="nav-number">3.</span> <span class="nav-text">8.3 实践练习时间</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ken Deng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/11/19/七天学会Python编程-08-第八章-数据分析/';
+          this.page.identifier = '2018/11/19/七天学会Python编程-08-第八章-数据分析/';
+          this.page.title = '七天学会Python编程 -- 第八章 数据分析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,七天学会Python编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="3.1 if条件控制是很常用的程序指令，拿我们常见的一种场景，去买高铁票，小孩是半票，一般是通过身高来判断，通常规则是低于1.5米半票，年龄小于2岁是免票，这种就是典型的条件控制。 Python 里用 if 来做这种判断，像上面的场景可以用这样的代码来处理 1234567891011age = 10height = 1.45price = 50if height &amp;lt; 1.5:    pric">
+<meta name="keywords" content="Python,七天学会Python编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七天学会Python编程 -- 第三章 条件控制">
+<meta property="og:url" content="http://yoursite.com/2018/11/19/七天学会Python编程-03-第三章-条件控制/index.html">
+<meta property="og:site_name" content="Technology and Investing Blog">
+<meta property="og:description" content="3.1 if条件控制是很常用的程序指令，拿我们常见的一种场景，去买高铁票，小孩是半票，一般是通过身高来判断，通常规则是低于1.5米半票，年龄小于2岁是免票，这种就是典型的条件控制。 Python 里用 if 来做这种判断，像上面的场景可以用这样的代码来处理 1234567891011age = 10height = 1.45price = 50if height &amp;lt; 1.5:    pric">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-19T05:47:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七天学会Python编程 -- 第三章 条件控制">
+<meta name="twitter:description" content="3.1 if条件控制是很常用的程序指令，拿我们常见的一种场景，去买高铁票，小孩是半票，一般是通过身高来判断，通常规则是低于1.5米半票，年龄小于2岁是免票，这种就是典型的条件控制。 Python 里用 if 来做这种判断，像上面的场景可以用这样的代码来处理 1234567891011age = 10height = 1.45price = 50if height &amp;lt; 1.5:    pric">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/19/七天学会Python编程-03-第三章-条件控制/"/>
+
+
+
+
+
+  <title>七天学会Python编程 -- 第三章 条件控制 | Technology and Investing Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Technology and Investing Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/七天学会Python编程-03-第三章-条件控制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">七天学会Python编程 -- 第三章 条件控制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T11:58:07+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/19/七天学会Python编程-03-第三章-条件控制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/19/七天学会Python编程-03-第三章-条件控制/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="3-1-if"><a href="#3-1-if" class="headerlink" title="3.1 if"></a>3.1 if</h2><p>条件控制是很常用的程序指令，拿我们常见的一种场景，去买高铁票，小孩是半票，一般是通过身高来判断，通常规则是低于1.5米半票，年龄小于2岁是免票，这种就是典型的条件控制。</p>
+<p>Python 里用 if 来做这种判断，像上面的场景可以用这样的代码来处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="number">10</span></span><br><span class="line">height = <span class="number">1.45</span></span><br><span class="line">price = <span class="number">50</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> height &lt; <span class="number">1.5</span>:</span><br><span class="line">    price = price * <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> age &lt; <span class="number">2</span>:</span><br><span class="line">    price = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">print(price)</span><br></pre></td></tr></table></figure>
+<p>上面这段代码是先定义了 3 个变量，分别是年龄 age 是 10 岁，身高 height 是 1.45 米，高铁票原价 price 是 50 元。然后程序先判断身高，如果低于 1.5 米就把价格变为半价，用 price 乘以 0.5 后再赋予 price 变量，就是改变 price 的数据。然后程序再判断年龄，如果小于2岁就是免票，也就是票价为 0。最后把价格打印出来。</p>
+<p>观察一下上面代码，我们能发现 if 指令的用法：if 后面是条件判断语句，后接冒号 ，接着下面的指令缩进了。这就是 if 的使用规则，缩进是很重要的概念，Python 用缩进来表示不同的程序块。比如 if 指令下面的缩进是属于 if 指令的程序块，也就是在 if 指令的条件判断成立时就会执行它的程序块，如果条件判断不成立就不会执行。</p>
+<p>对于整个代码块来说，这个程序首先是一个大的程序块，代表整个程序，然后用 if 指令和对应的缩进形成小的程序块，多个小的程序块共同组成最大的程序块。程序块里可以有多行代码，只要保持相同的缩进就表示同一个程序块，例如下面这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> height &lt; <span class="number">1.5</span>:</span><br><span class="line">    price = price * <span class="number">0.5</span></span><br><span class="line">    print(<span class="string">"Half price"</span>)</span><br><span class="line">其中的</span><br><span class="line"></span><br><span class="line">price = price * <span class="number">0.5</span></span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Half price"</span>)</span><br></pre></td></tr></table></figure>
+<p>这两行属于同一个程序块，都是属于 if height &lt; 1.5: 指令的。</p>
+<p>Python 的这种缩进规则既属于语言语法，也属于排版风格。会使每个 Python 程序都看起来比较相像，不会像其他很多语言。代码排版风格往往多种多样，差异很大，让你阅读不同排版风格的代码，会比较困难。而代码大部分时间是用来阅读的，所以清晰一致的排版风格非常重要。另外，缩进是逐级进行的，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span>...</span></span><br><span class="line"><span class="function">    <span class="title">if</span>...</span></span><br><span class="line"><span class="function">        <span class="title">print</span>...</span></span><br></pre></td></tr></table></figure>
+<p>就像军衔一样，从元帅到上将、中将、少将再到后面的一等兵、二等兵……程序也是如此，逐级类推。</p>
+<h2 id="3-2-if-…-else"><a href="#3-2-if-…-else" class="headerlink" title="3.2 if … else"></a>3.2 if … else</h2><p>如果天气下雨你就打伞，如果不下雨就不用打伞。</p>
+<p>用程序代码怎么表示这句话？</p>
+<p>用刚才学过的 if 指令可以这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">weather = <span class="string">"rainy"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> weather == <span class="string">"rainy"</span>:</span><br><span class="line">    print(<span class="string">"You should bring umbrella."</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> weather != <span class="string">"rainy"</span>:</span><br><span class="line">    print(<span class="string">"You don't need to bring an umbrella."</span>)</span><br></pre></td></tr></table></figure>
+<p>代码是能正常运行的，但现在有更简单的方式去表示上面的意思：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">weather = <span class="string">"rainy"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> weather == <span class="string">"rainy"</span>:</span><br><span class="line">    print(<span class="string">"You should bring an umbrella."</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"You don't need to bring an umbrella."</span>)</span><br></pre></td></tr></table></figure>
+<p>if 后面用 else 来表示 if 条件判断不成立的情况，也就是非if的情况。请注意观察，else 后面也是有冒号: ，另外下面的程序块也是缩进的，说明下面缩进的程序代码是属于 else 指令的，是在 else 指令有效时才会执行，也就是在 if 条件判断不成立时才会使 else 指令有效。</p>
+<p>进一步的还有 else if，也就是在 else 后面进一步做条件判断，这稍有点复杂，在需要用到的时候可以上网查找对应的资料。</p>
+<h2 id="3-3-实践练习时间"><a href="#3-3-实践练习时间" class="headerlink" title="3.3 实践练习时间"></a>3.3 实践练习时间</h2><p>过去这个章节我们学习了变量、列表和对象，现在开始做几个实践练习，可以用在线 Python 练习环境，也可以用本地安装的 Python 环境。练习时注意一定要让程序能正常运行，并且按要求输出结果。</p>
+<p>练习1：</p>
+<p>定义一个变量 a 并赋值 50，用 if 指令判断 a 是否小于 100，如果小于就打印 “a is smaller than 100.”。程序能成功执行后再修改变量 a 的值为 120，再执行一次程序，看一下运行结果是什么。</p>
+<p>练习2：</p>
+<p>定义一个变量 age 并赋值 10，表示 10 岁，然后用 if 指令判断是否小于 12，如果大于就打印 “This is a child.”，否则就打印 “This is not a child”。程序能成功执行后再修改变量 age 的值为 20，再执行一次程序，看一下运行结果是什么。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/七天学会Python编程/" rel="tag"># 七天学会Python编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/七天学会Python编程-02-第二章-基础入门/" rel="next" title="七天学会Python编程 -- 第二章 基础入门">
+                <i class="fa fa-chevron-left"></i> 七天学会Python编程 -- 第二章 基础入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/19/七天学会Python编程-04-第四章-循环遍历/" rel="prev" title="七天学会Python编程 -- 第四章 循环遍历">
+                七天学会Python编程 -- 第四章 循环遍历 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ken Deng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-if"><span class="nav-number">1.</span> <span class="nav-text">3.1 if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-if-…-else"><span class="nav-number">2.</span> <span class="nav-text">3.2 if … else</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-实践练习时间"><span class="nav-number">3.</span> <span class="nav-text">3.3 实践练习时间</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ken Deng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/11/19/七天学会Python编程-03-第三章-条件控制/';
+          this.page.identifier = '2018/11/19/七天学会Python编程-03-第三章-条件控制/';
+          this.page.title = '七天学会Python编程 -- 第三章 条件控制';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

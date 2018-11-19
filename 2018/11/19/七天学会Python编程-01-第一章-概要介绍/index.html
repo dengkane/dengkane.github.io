@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,七天学会Python编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1 为什么让少年儿童学编程？It’s cool! 跟身边朋友说一下自己懂 Python 编程，能写个爬虫程序把王者荣耀自己想要的英雄的皮肤模型和头像都爬取下来，甚至能写程序恶搞一下自己的朋友，做一个黑客一样的电脑专家是不是很 Cool？ 从社会发展趋势角度看 当今社会移动互联网、大数据和人工智能等领域飞速发展，带动社会不断发生变更，根据一些预测分析，未来有超过50%的工作种类都可能被人工智能替">
+<meta name="keywords" content="Python,七天学会Python编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七天学会Python编程 -- 第一章 概要介绍？">
+<meta property="og:url" content="http://yoursite.com/2018/11/19/七天学会Python编程-01-第一章-概要介绍/index.html">
+<meta property="og:site_name" content="Technology and Investing Blog">
+<meta property="og:description" content="1.1 为什么让少年儿童学编程？It’s cool! 跟身边朋友说一下自己懂 Python 编程，能写个爬虫程序把王者荣耀自己想要的英雄的皮肤模型和头像都爬取下来，甚至能写程序恶搞一下自己的朋友，做一个黑客一样的电脑专家是不是很 Cool？ 从社会发展趋势角度看 当今社会移动互联网、大数据和人工智能等领域飞速发展，带动社会不断发生变更，根据一些预测分析，未来有超过50%的工作种类都可能被人工智能替">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-19T05:38:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七天学会Python编程 -- 第一章 概要介绍？">
+<meta name="twitter:description" content="1.1 为什么让少年儿童学编程？It’s cool! 跟身边朋友说一下自己懂 Python 编程，能写个爬虫程序把王者荣耀自己想要的英雄的皮肤模型和头像都爬取下来，甚至能写程序恶搞一下自己的朋友，做一个黑客一样的电脑专家是不是很 Cool？ 从社会发展趋势角度看 当今社会移动互联网、大数据和人工智能等领域飞速发展，带动社会不断发生变更，根据一些预测分析，未来有超过50%的工作种类都可能被人工智能替">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/19/七天学会Python编程-01-第一章-概要介绍/"/>
+
+
+
+
+
+  <title>七天学会Python编程 -- 第一章 概要介绍？ | Technology and Investing Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Technology and Investing Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/七天学会Python编程-01-第一章-概要介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">七天学会Python编程 -- 第一章 概要介绍？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T11:50:03+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/19/七天学会Python编程-01-第一章-概要介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/19/七天学会Python编程-01-第一章-概要介绍/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-1-为什么让少年儿童学编程？"><a href="#1-1-为什么让少年儿童学编程？" class="headerlink" title="1.1 为什么让少年儿童学编程？"></a>1.1 为什么让少年儿童学编程？</h2><p>It’s cool!</p>
+<p>跟身边朋友说一下自己懂 Python 编程，能写个爬虫程序把王者荣耀自己想要的英雄的皮肤模型和头像都爬取下来，甚至能写程序恶搞一下自己的朋友，做一个黑客一样的电脑专家是不是很 Cool？</p>
+<p>从社会发展趋势角度看</p>
+<p>当今社会移动互联网、大数据和人工智能等领域飞速发展，带动社会不断发生变更，根据一些预测分析，未来有超过50%的工作种类都可能被人工智能替代，这对很多人来说可能会失去工作机会，但也意味着会有越来越多的人从事跟人工智能及开发的工作，这是为了让 AI 能替代越来越多的人力工作。</p>
+<p>这里带来一个比较沉重的话题，那么多人失业后要怎么安排？根据一些分析，很多人会转向娱乐服务业，因为人工智能让很多人有了足够的休闲时间，这自然就促进了娱乐领域的发展，也相应会有很多人从事娱乐相关的行业，例如电影、游戏、旅游等等。也会有一部分人转向人工智能领域，或者做数据分析，或者做开发，或者其他相关的，这样编程就是一项重要的技能。</p>
+<p>从少年儿童自身素质提高角度看</p>
+<p>编程需要良好的逻辑思维能力，学习编程会培养少年儿童这方面的能力，让他们思维更清晰、更有条理。</p>
+<p>未来教育领域很多科目会跟编程结合，特别是理科类，可能老师让学生编个程序来模拟某个理论，这样能促进学生对该理论的理解。</p>
+<h2 id="1-2-为什么选择Python？"><a href="#1-2-为什么选择Python？" class="headerlink" title="1.2 为什么选择Python？"></a>1.2 为什么选择Python？</h2><p>主要原因是Python很热门，热门的原因有不少，分析一下主要有下面几个：</p>
+<p>1.容易上手</p>
+<p>语法相对简单，上手很快，这个是很大优势，因为有挺多编程基础有限的人转来学习编程，他们可能是从其他领域转行过来，如果难度太大就难以在短时间内掌握。</p>
+<p>2.规范化程度高</p>
+<p>Python程序代码看起来都挺像的，这得益于它在程序格式方面的限制，主要是缩进方面，语法跟排版相结合，看起来很清晰，比较一致。</p>
+<p>3.适用面广</p>
+<p>Python 以前的普及程度不算高，是最近几年随着大数据和人工智能领域快速普及起来。Python最初在服务器端脚本（简化操作系统管理员的工作）开发方面用得比较多，后来在Web开发领域发展起来，然后又在大数据和人工智能领域迅速发展。</p>
+<p>概括一下，Python 可以做服务端脚本开发、Web开发、大数据开发、人工智能开发等等，是不是很强悍？</p>
+<p>掌握Python后可以做很多领域的开发工作。</p>
+<h2 id="1-3-选用什么电脑学Python编程？"><a href="#1-3-选用什么电脑学Python编程？" class="headerlink" title="1.3 选用什么电脑学Python编程？"></a>1.3 选用什么电脑学Python编程？</h2><p>对于Python基础方面的学习，可以用在线的练习环境，任意一台电脑只要能上网就可以打开在线的练习环境，进行实际练习，具体可以看一下附录中的“在线 Python 练习环境”章节。</p>
+<p>在线练习环境的优点是不需要在自己电脑上安装Python环境，随时都可以使用；但缺点是不能保存写过的程序，也不能安装额外的Python模块，学到后面不建议用线上编程。</p>
+<p>在本书后期的 Web 开发章节，需要有环境能安装Python模块，这时候推荐买一个树莓派，现在卖的是树莓派3小主机，200元左右，预装的系统里Python环境和编辑器都有了，额外再配一套无线鼠标键盘和HDMI线就可以接到电视上作为一套完整的开发电脑用了。</p>
+<p>树莓派+外壳+电源线：220左右</p>
+<p>无线鼠标键盘：60左右</p>
+<p>HDMI线：20左右</p>
+<p>总共成本300左右，比较超值。</p>
+<p>电脑有几个主要部分，这套环境就是由那几个部分拼接而成的，可以让孩子很好地清楚电脑的结构。现在他们接触的大多是手机、平板电脑等，他们往往不知道电脑具体是怎么组成的。</p>
+<p>对于普通的Windows电脑，可以访问Python语言的官方网站的下载地址</p>
+<p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">https://www.python.org/downloads/windows/</a></p>
+<p>下载 Python 2.7 版本的，这里又有了 3.0 和 2.0 的版本之争，未来 3.0 是趋势，但 2.0 目前是主流。而且对于编程入门来说 2.0 跟 3.0 的差异很小，通过 2.0 版本学会编程后基本可以无障碍地切换到 3.0。</p>
+<h2 id="1-4-学习步骤是怎样的？"><a href="#1-4-学习步骤是怎样的？" class="headerlink" title="1.4 学习步骤是怎样的？"></a>1.4 学习步骤是怎样的？</h2><p>首先会解释必要的概念，我们会尽量用生动有趣的方式去讲解，然后会举例说明怎样去用，同时会介绍在实际生活中可能的用途。</p>
+<p>下面就是实践练习环节，基本每章节都有这部分，目的是为了加深对所学内容的理解。这部分会出一个跟实际有联系的题目，让学习者尝试自己去编程实现。要多发挥主观能动性，有不懂的地方多去翻阅前面的概念解释，或者自己上网搜索资料。</p>
+<p>如果有觉得很重要的概念可以做好笔记，不清晰的地方一定要理解透彻，小洞不补，大洞吃苦。</p>
+<p>多翻翻学习过的内容，巩固一下以前的。一个复杂的程序也是由简单的内容构成的，所以要多复习一下。</p>
+<p>多去想想现实中有什么问题，可以用自己掌握的编程技术去解决一下，不用企图改变世界，每次能解决一个小问题，累积起来可能在不经意间就改变世界了。</p>
+<h2 id="1-5-学习过程中要注意什么问题？"><a href="#1-5-学习过程中要注意什么问题？" class="headerlink" title="1.5 学习过程中要注意什么问题？"></a>1.5 学习过程中要注意什么问题？</h2><p>学习编程需要多实践，所以有个可以随时用的编程环境是很重要。一开始可以使用附录中在线练习环境，比较方便，到后期一些比较高级的课题需要有个能自己安装Python模块的开发环境。</p>
+<p>养成一个习惯，只要在教程里看到代码就去编程环境试一下，不要纸上谈兵。很多时候只是看了理解了，其实认识还不够深刻，只有反复实践才能真正掌握，每次写完程序都尝试用自己的语言翻译代码，这样对理解有很大帮助。从理解慢慢开始到能熟练运用。</p>
+<p>要学会去网上搜索资料，如果看教程有不太懂的地方多去上网搜索一下，看看别人是怎么解释的。网上关于编程的资料非常多，特别是有关Python这种热门编程语言的，小到一个命令或函数的用法，大到一个现实问题的解决方案，都能找到相关的信息。</p>
+<p>关于教程选择方面，网上可选的编程教程很多，目的都是教让你掌握编程技术，但讲的方式不一样，也不用选太多，找到一个比较适合自己的坚持学完，这样就比较系统地掌握编程的有关内容了，然后可以再选择性地找些其他教程，看看有什么可以补充的，或者对某些知识点有其他解释方法能加深理解的。</p>
+<p>学习 Python 的要点</p>
+<p>虽然学习 Python 可能会有点枯燥，但不要半途而废。当你解决了一次次问题，克服了一次次困难，最终编出了一套成功的程序后，你会很有成就感的。</p>
+<p>不管是学什么，一定要记住：理解胜于记忆。如果你背程序的公式来学习编程的话，那会非常困难。如果理解了再去编写程序，你会很轻松的。对各个概念一定要有清晰的理解。可以学画一个脑图，方便理解，理解总结也是一个很好的习惯。</p>
+<p>学会举一反三，学会理解程序的变形和同一用法对不同程序的应用，这可以方便你在之后解决问题时迅速理清思路，构思出程序思路和需要的代码，快速解决问题。</p>
+<p>最后，希望你能通过此书走上编程的成功之路。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/七天学会Python编程/" rel="tag"># 七天学会Python编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/七天学会Python编程-001-目录/" rel="next" title="七天学会Python编程 -- 目录">
+                <i class="fa fa-chevron-left"></i> 七天学会Python编程 -- 目录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/19/七天学会Python编程-02-第二章-基础入门/" rel="prev" title="七天学会Python编程 -- 第二章 基础入门">
+                七天学会Python编程 -- 第二章 基础入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ken Deng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-为什么让少年儿童学编程？"><span class="nav-number">1.</span> <span class="nav-text">1.1 为什么让少年儿童学编程？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-为什么选择Python？"><span class="nav-number">2.</span> <span class="nav-text">1.2 为什么选择Python？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-选用什么电脑学Python编程？"><span class="nav-number">3.</span> <span class="nav-text">1.3 选用什么电脑学Python编程？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-学习步骤是怎样的？"><span class="nav-number">4.</span> <span class="nav-text">1.4 学习步骤是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-学习过程中要注意什么问题？"><span class="nav-number">5.</span> <span class="nav-text">1.5 学习过程中要注意什么问题？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ken Deng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/11/19/七天学会Python编程-01-第一章-概要介绍/';
+          this.page.identifier = '2018/11/19/七天学会Python编程-01-第一章-概要介绍/';
+          this.page.title = '七天学会Python编程 -- 第一章 概要介绍？';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
