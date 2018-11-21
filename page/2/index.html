@@ -269,6 +269,243 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-02-第二章-基础入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/七天学会Python编程-02-第二章-基础入门/" itemprop="url">七天学会Python编程 -- 第二章 基础入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T11:55:45+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/19/七天学会Python编程-02-第二章-基础入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/19/七天学会Python编程-02-第二章-基础入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="2-1-先一起写个-Hello-World"><a href="#2-1-先一起写个-Hello-World" class="headerlink" title="2.1 先一起写个 Hello World"></a>2.1 先一起写个 Hello World</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">"Hello World"</span></span><br></pre></td></tr></table></figure>
+<p>保存上面这行代码到一个名字为 helloworld.py* 的文件里，这就是一个完整的可以运行程序了。</p>
+<p>翻译一下这行代码，print 是 Python 提供的函数，可以直接拿来用。函数后面会详细讲，这里可以看作是一种可以重复使用的代码，print 函数的目的是打印信息到屏幕上。背后是 Python 提供的一段代码，当你使用时，会触发后台代码，并运行这段程序代码，可以重复使用。也就是说你用这个函数的时候也就是在用背后的那段代码。</p>
+<p>用函数有几个关键要素，一个是函数名称，这里是 print，另一个是参数，就是你要传给这个函数的数据，让这个函数去处理。对这个 print 函数来说，参数就是你要它打印的信息，就是 “Hello World”这个字符串。</p>
+<p>字符串是什么？字符串是一种数据类型，常见的数据类型有数字型和字符串型，数字型是能进行加减程序运算的，例如 10、35 这样的；字符串主要用于文字记录，比如姓名和电话号码这样的信息。</p>
+<p>print 和 “Hello World” 之间的空格表示把 “Hello World” 这个字符串作为参数传给 print 这个函数，这是 Python 的语法。其实函数的通常用法是 print(“Hello World”)，也就是函数名字后面是括号，括号里面是参数，但 Python 既允许函数名字和参数之间用空格，也可以用括号。</p>
+<p>再看下这行代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">"Hello World"</span>, <span class="string">"Hello again"</span></span><br></pre></td></tr></table></figure>
+<p>这是什么意思？这表示传两个参数给 print 函数，这个函数都会打印出来。也可以这样用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Hello World"</span>, <span class="string">"Hello again"</span>)</span><br></pre></td></tr></table></figure>
+<p>下面我们运行一下这个程序，要了解一些命令行操作了。这里假设你使用 Windows 电脑并且已经安装好 Python 环境。</p>
+<p>鼠标点击屏幕左下角的 Windows 图标，选择”运行”，在出现的输入框里输入 cmd 后按回车键，这时会打开一个黑色背景的窗口，里面就可以输入命令了，敲入 cd 程序保存目录，例如 cd c:\programs ，表示你的程序保存在 c:\programs 目录下，你在命令行窗口里切换到这个目录下。</p>
+<p>敲入 python helloworld.py 后按回车，这时候就会打印出 “Hello World”。</p>
+<p>Python 是安装的 Python 环境提供的命令，用于执行 Python 程序文件。helloworld.py 就是刚才你保存的那个程序文件的名字。</p>
+<p>*：一般的 Python 程序都是以后缀名“py”来创建的。程序会通过此识别 Python 程序文件。</p>
+<h2 id="2-2-什么是变量？"><a href="#2-2-什么是变量？" class="headerlink" title="2.2 什么是变量？"></a>2.2 什么是变量？</h2><p>先大概讲一下计算机的主要组成，CPU 和内存是主要组成部分，CPU 是用于计算的，它可以飞速地处理计算。内存是用于暂存数据，而硬盘是永久保存数据。</p>
+<p>变量是用于标识内存中的某块存储空间，用于存储某种数据，比如这行 Python 代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>就表示定义一个名字叫 a 的变量，在内存中分配一块存储空间，暂存 10 这个数据到这块空间里，这种让一个变量等于一个数值的操作叫作赋值，赋值这个概念后面会经常用到。</p>
+<p>上面的内容可以有点难理解，举个生活中的例子来描述一下。比如你有个篮子，放进去两个苹果，这个篮子可以看作是变量，两个苹果是里面的数据，两个苹果可以换成1个苹果，或者换成3个桔子，表示变量里面的数据是可以变化的。</p>
+<p>为什么要用变量？让我们看个例子，假设你要写个加法计算器程序，让用户输入两个数字，你的程序把两个数字加起来，显示出结果。用户输入的这两个数字就需要暂存到内存里，然后把计算结果也暂存在内存里，最后再把结果显示出来。</p>
+<p>常见的变量类型有数字类型、字符串类型和布尔类型，例如上面用 a = 10 定义的 a 就是数字类型 int。而 b = “Hello World” 定义的 b 就是字符串类型 str。c = True 定义的 c 就是布尔类型 bool，布尔类型常常用于条件判断指令。布尔类型可能有些难以理解，其实就是相当于一个嫌疑人说出辩词，法官根据证据判断真假。判断结果有罪或无罪。</p>
+<p>数字类型可以进行加减乘除，例如下面的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a1 = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">a2 = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">a3 = a1 + a2</span><br><span class="line"></span><br><span class="line">print(a3)</span><br></pre></td></tr></table></figure>
+<p>上面代码是定义了3个变量，a1 和 a2 是直接赋给了数值，a3 是等于 a1 和 a2 相加的和，然后把 a3 打印出来。</p>
+<h2 id="2-3-列表是什么？"><a href="#2-3-列表是什么？" class="headerlink" title="2.3 列表是什么？"></a>2.3 列表是什么？</h2><p>列表是指一个变量名字表示内存空间中多个数据，例如这行代码就是定义一个列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br></pre></td></tr></table></figure>
+<p>这个列表变量名字是 a ，有3个数据，中括号就表示一组数据。相当于一个篮子，里面有苹果，梨和橙子，这些水果就是数据，而装着水果的篮子就是一个列表。</p>
+<p>为什么要用列表？</p>
+<p>是因为在一些情况下用单个变量表示很多数据时比较麻烦，例如我们要用单个变量保存一万个学生的数学考试成绩，是不是要定义一万个变量？像这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a1 = <span class="number">90</span></span><br><span class="line"></span><br><span class="line">a2 = <span class="number">92</span></span><br><span class="line"></span><br><span class="line">a3 = <span class="number">89</span></span><br><span class="line"></span><br><span class="line">a4 = <span class="number">85</span></span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>而用列表就可以这样定义了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">90</span>, <span class="number">92</span> , <span class="number">89</span>, <span class="number">85</span>, ...]</span><br></pre></td></tr></table></figure>
+<p>读取单个成绩时用这样方式：</p>
+<p>a[0] 表示访问第一个数据，a[1] 表示访问第二个数据，依次下去。中括号里面的数字是顺序号，从 0 开始计算，第一个数据的顺序号是 0。</p>
+<p>Python 用 list 表示列表，其他编程语言里还有数组的概念，数组一般是指数据数量不可变的，比如前面的一万个学生的数学成绩，如果想增加几个或减少几个都不可以。而列表一般是可变的，比如一开始只有 3 个数据，可以再增加两个，也可以再减少几个，所以用起来很灵活。Python 不区分数组和列表，都统一为列表。</p>
+<h2 id="2-4-字典是什么？"><a href="#2-4-字典是什么？" class="headerlink" title="2.4 字典是什么？"></a>2.4 字典是什么？</h2><p>字典在 Python 里叫 dict，在其他语言里叫 Map，也是指一个变量名字表示内存空间中多个数据，但这多个数据在字典里面又可以定义容易识别的名字，这个名字也叫 key 值，而不是像列表那样只能用顺序索引去访问。</p>
+<p>例如下面就是定义一个字典：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = &#123; <span class="string">"name"</span>: <span class="string">"Tom"</span>, <span class="string">"mobile"</span>: <span class="string">"1300000"</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以用 a[“name”] 访问字典内的一个数据，用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print( a[<span class="string">"name"</span>] )</span><br></pre></td></tr></table></figure>
+<p>来读取数据后打印，也可以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="string">"name"</span>] = “John”</span><br></pre></td></tr></table></figure>
+<p>这样是修改一个数据。</p>
+<p>列表跟字典的最大差别是字典提供了更容易识别的内部数据访问方式，而列表只能用顺序索引，有时候容易搞混。</p>
+<p>字典的常用使用方法有这几个，一个是判断某个 key 值是否存在，这样用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = &#123; <span class="string">"name"</span>: <span class="string">"Tom"</span>, <span class="string">"mobile"</span>: <span class="string">"1300000"</span> &#125;</span><br><span class="line"></span><br><span class="line">isNameExisted = <span class="string">"name"</span> <span class="keyword">in</span> a</span><br><span class="line"></span><br><span class="line">print( isNameExisted )</span><br></pre></td></tr></table></figure>
+<p>“name” in a 这个就是判断某个 key 值在字典中是否存在，上面代码是把判断结果放到 isNameExisted 变量中，是布尔类型，True 或 False，上面代码会打印 True。</p>
+<p>从字典里删除某个 key 值及对应的数据是这样用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = &#123; <span class="string">"name"</span>: <span class="string">"Tom"</span>, <span class="string">"mobile"</span>: <span class="string">"1300000"</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span>( a[<span class="string">"name"</span>] )</span><br><span class="line"></span><br><span class="line">isNameExisted = <span class="string">"name"</span> <span class="keyword">in</span> a</span><br><span class="line"></span><br><span class="line">print( isNameExisted )</span><br></pre></td></tr></table></figure>
+<p>上面代码会打印 False，因为我们删掉了 “name” 这个 key 值。</p>
+<p>如果看不太明白可以参照原来列表那个例子，也大致相同。</p>
+<h2 id="2-5-对象是什么？"><a href="#2-5-对象是什么？" class="headerlink" title="2.5 对象是什么？"></a>2.5 对象是什么？</h2><p>一切皆是对象。</p>
+<p>是不是感觉这句话有点夸张？实际上我们前面两个章节学过的变量和列表都是属于对象。</p>
+<p>对象的特点是什么？对象一般有属性，也有能被调用的方法，方法也就是函数。例如对 car 这样一个对象，可以有个属性是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">car.color = <span class="string">"red"</span></span><br></pre></td></tr></table></figure>
+<p>表示它有个 color 属性，属性的值是 “red”，我们可以用 car.color 这种方式访问属性。</p>
+<p>可以有个方法是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">car.move()</span><br></pre></td></tr></table></figure>
+<p>表示移动，调用这个方法时以为着 car 对象会移动，至于到底怎么移动的我们可以不用管，是 car 对象自己要解决的问题。</p>
+<p>那拿我们前面学过的变量为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">"a string"</span></span><br></pre></td></tr></table></figure>
+<p>它有这样一个属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.__doc__</span><br></pre></td></tr></table></figure>
+<p>表示对字符串对象类型 str 的用法解释，用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a.__doc__)</span><br></pre></td></tr></table></figure>
+<p>可以打印出来。</p>
+<p>它有个方法是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.upper()</span><br></pre></td></tr></table></figure>
+<p>表示把字符串里的字母都转为大写字母。</p>
+<p>列表的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br></pre></td></tr></table></figure>
+<p>可以用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b.append(<span class="number">40</span>)</span><br></pre></td></tr></table></figure>
+<p>这个方法追加一个数据。</p>
+<p>列表的属性一般用的比较少，主要是使用各种方法，它也可以使用 b.<strong>doc</strong> 来访问 b 对象对应的列表类型 list 的使用说明。</p>
+<p>另外我们也可以自己定义一个对象类型，专业的名字叫“类”，就是我们定义一个类的属性和方法，然后在程序里就可以定义一个变量为这个类的类型。这个比较复杂，在简单程序里用得不多，这里解释一下主要为了后面的课程，可能会用到类。</p>
+<p>建议上网更多地了解一下对象的应用和例子。</p>
+<h2 id="2-6-实践练习时间"><a href="#2-6-实践练习时间" class="headerlink" title="2.6 实践练习时间"></a>2.6 实践练习时间</h2><p>过去这个章节我们学习了变量、列表和对象，现在开始做几个实践练习，可以用在线 Python 练习环境，也可以用本地安装的 Python 环境。练习时注意一定要让程序能正常运行，并且按要求输出结果。</p>
+<p>练习1：</p>
+<p>写一个程序，定义两个变量，变量名字分别是 a 和 b，给 a 赋值 179，给 b 赋值 257，然后把 a 和 b 相加的和赋给变量 c，打印变量 c 。</p>
+<p>练习2：</p>
+<p>写一个程序，定义一个列表 list1，里面保存 100, 200, 300, 400, 500 这几个数字，然后把数组里的数字加起来后把结果赋给变量 sum，并且打印变量 sum。</p>
+<p>练习3：</p>
+<p>写一个程序，定义一个字符串变量 str1，赋值 “Hello Python”，先打印 <strong>doc</strong> 属性，然后使用 lower() 方法转成小写字母后打印出来。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-01-第一章-概要介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1776,165 +2013,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/10/09/Simple-and-reliable-portfolio/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ken Deng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technology and Investing Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/09/Simple-and-reliable-portfolio/" itemprop="url">Simple and reliable portfolio</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-09T14:55:37+08:00">
-                2018-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/投资/" itemprop="url" rel="index">
-                    <span itemprop="name">投资</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/09/Simple-and-reliable-portfolio/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/09/Simple-and-reliable-portfolio/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>40% Invesco QQQ Trust (QQQ), this is stocks.<br>40% iShares 20+ Year Treasury Bond ETF (TLT), this is bond.<br>20% SPDR Gold Shares (GLD), this is gold.</p>
-<p>I have done backtesting many times on portfoliovisualizer.com, and from Jan 2005 to Sep 2018, the annual return is over 10%, and the max drawdown is 16%, compared with SPY, the annual return is about 8.7% and the max drawdown is about 51%. </p>
-<p>The period inludes the 2008 financial crisis, and too many people had huge losses at that time.</p>
-<p>You can check this backtesting image from portfoliovisualizer.com.</p>
-<p><img src="/images/QQQ-TLT-GLD.png" alt="portfolio backtesting"></p>
-<p>You just split your money according to the portfolio percentages, and balance them every several months.</p>
-<p>Here is my recommendation for investing, focus on your job and make money regularly, then save money to do investing according to the portfolio suggestion, and you can be rich and retire earlier than you can imagine.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1985,7 +2063,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2007,7 +2085,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
