@@ -269,6 +269,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-07-第七章-模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/七天学会Python编程-07-第七章-模块/" itemprop="url">七天学会Python编程 -- 第七章 模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T13:48:05+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/19/七天学会Python编程-07-第七章-模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/19/七天学会Python编程-07-第七章-模块/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="7-1-什么是模块？"><a href="#7-1-什么是模块？" class="headerlink" title="7.1 什么是模块？"></a>7.1 什么是模块？</h2><p>在上面章节有提到，模块可以理解为把一组相关的函数放在一起，起个分类名字，然后通过这个分类名字加函数名字来使用这些函数，用这个方式理解比较容易懂。比如 pickle 模块，它提供了几个相关的函数，让使用者可以方便的保存对象到文件，以及从文件加载对象。</p>
+<p>为什么要使用模块？</p>
+<p>模块的目的是更好地重用代码，你既可以在自己的项目中重用自己开发的一些模块，也可以分享模块给其他人。</p>
+<p>比如 pickle 模块，那个开发者开发出来后可以很方便地分享给其他人使用，它已经被吸收到 Python 标准库中了，也就是说只要安装了 Python 环境就可以直接用这个模块。其他很多模块没有被包含到 Python 标准库中，需要额外安装。</p>
+<p>比如说你要开发一个系统，需要用到发邮件的功能，可以找个别人开发的模块来用，也可以自己开发一个发邮件的模块，在自己的多个系统中使用。</p>
+<h2 id="7-2-模块定义和使用方法"><a href="#7-2-模块定义和使用方法" class="headerlink" title="7.2 模块定义和使用方法"></a>7.2 模块定义和使用方法</h2><p>最简单的模块就是一个里面只包含函数的 .py 文件，只包含函数的意思是不包含主程序内容，主程序的概念在前面章节解释过，这里再说明一下。</p>
+<p>如果一个程序是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"This is func1."</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"This is func2."</span>)</span><br></pre></td></tr></table></figure>
+<p>假设程序文件名字是 test1.py，当你用 python test1.py 运行时不会运行里面的代码，因为里面只定义了几个函数，并没有主程序代码，所以这个 test1.py 只能作为一个模块给别的程序使用，例如下面这段代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"This is the main program."</span>)</span><br></pre></td></tr></table></figure>
+<p>假设这个程序文件名字是 test2.py，用 python test2.py 运行时就能显示内容，里面没有任何函数，代码都属于主程序代码。</p>
+<p>看一下怎样在 test2.py 中使用 test1.py 这个模块，修改 test2.py 文件的代码为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> test1</span><br><span class="line"></span><br><span class="line">print(<span class="string">"This is the main program."</span>)</span><br><span class="line"></span><br><span class="line">test1.func1()</span><br><span class="line"></span><br><span class="line">test1.func2()</span><br></pre></td></tr></table></figure>
+<p>用 python test2.py 运行时就能显示 test1.py 中两个函数的输出。</p>
+<p>模块还可以通过目录进一步细分为包，也就是对模块再分类，这里就不做详细介绍了，需要用到的时候可以上网查一下资料。</p>
+<h2 id="7-3-分享你的模块给别人"><a href="#7-3-分享你的模块给别人" class="headerlink" title="7.3 分享你的模块给别人"></a>7.3 分享你的模块给别人</h2><p>我们用到的 pickle 是使用了别人分享的模块，你也可以分享模块给别人。</p>
+<p>例如刚才章节里的 test1.py 文件就是一个模块，你直接发给别人，别人就可以在他们代码里用。</p>
+<p>从规范化角度看，模块定义需要清晰明确，比如你想写一个发消息的模块，叫 MyMessaging.py，里面有发邮件的方法叫 sendEmail，有发微信的方法叫 sendWechat，有发短信的方法叫 sendSms，我们可以这样写：</p>
+<p>（这里只是演示目的，不真正发送消息，还是用打印的方式模拟发送消息）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sendEmail</span><span class="params">(email, content)</span>:</span></span><br><span class="line">    print(<span class="string">"Sending the email successfully"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sendWechat</span><span class="params">(wechatAccount, content)</span>:</span></span><br><span class="line">    print(<span class="string">"Sending the Wechat message successfully"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sendSms</span><span class="params">(mobile, content)</span>:</span></span><br><span class="line">    print(<span class="string">"Sending the sms successfully"</span>)</span><br></pre></td></tr></table></figure>
+<p>保存这个文件为 MyMessaging.py，分享给别人，在别人的程序里就可以这样使用了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> MyMessaging</span><br><span class="line"></span><br><span class="line">MyMessaging.sendEmail(<span class="string">"xxx@xxx.com"</span>, <span class="string">"email from me"</span>)</span><br><span class="line"></span><br><span class="line">MyMessaging.sendWechat(<span class="string">"xxx"</span>, <span class="string">"wechat message from me"</span>)</span><br><span class="line"></span><br><span class="line">MyMessaging.sendSms(<span class="string">"130xxxxx"</span>, <span class="string">"sms from me"</span>)</span><br></pre></td></tr></table></figure>
+<p>现在网上有很多开源项目，如果有兴趣可以参与，或者自己发起一个开源项目，吸引其他人参加，这是为软件开发整个生态做贡献，是比较有意义的事情。</p>
+<h2 id="7-4-实践练习时间"><a href="#7-4-实践练习时间" class="headerlink" title="7.4 实践练习时间"></a>7.4 实践练习时间</h2><p>过去章节我们学习了模块相关内容，下面通过实践练习来理解。</p>
+<p>练习1：</p>
+<p>编写一个模块，保存文件名为 MyCalculate.py，里面定义加 add、减 subtract、乘 multiply、除 divide 4个函数，这四个函数都有2个参数 variable1 和 variable2，然后把加减乘除计算结果返回。再写一个 test_MyCalculate.py 程序，调用 MyCalculate.py 这个模块中的那4个函数，并打印返回结果。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-06-第六章-文件操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1919,164 +2097,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/机器学习入门介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ken Deng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technology and Investing Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/19/机器学习入门介绍/" itemprop="url">机器学习入门介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T10:26:43+08:00">
-                2018-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/19/机器学习入门介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/19/机器学习入门介绍/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="机器学习跟通常的编程开发比较有什么差别？"><a href="#机器学习跟通常的编程开发比较有什么差别？" class="headerlink" title="机器学习跟通常的编程开发比较有什么差别？"></a>机器学习跟通常的编程开发比较有什么差别？</h2><p>我们一般接触到的编程开发一般都是根据规则编写程序代码，然后录入数据后按照规则运算结果。而机器学习是根据数据和对应的结果去找规则，找出的规则就可以用来分析处理新的数据。这就是通常的软件开发跟机器学习的主要差别。</p>
-<p>举个例子说明一下，比如经典的鸢尾花案例，这个案例在很多机器学习的教材里都能看到。这个案例收集了很多数据，主要是花瓣的几个特征值，以及对应花的种类。花瓣的特征值就是数据，而花的种类就是对应结果。那就可以用机器学习对这些数据做学习，希望能找出背后的规则，也就是当特征值满足什么条件时就说明它属于某个种类。</p>
-<p>而通常的软件开发是先人工分析这些数据，寻找内在的规律，总结出规则，然后让开发人员根据规则编写程序代码。</p>
-<h2 id="机器学习存在的一个主要问题"><a href="#机器学习存在的一个主要问题" class="headerlink" title="机器学习存在的一个主要问题"></a>机器学习存在的一个主要问题</h2><p>这种根据数据找规则的方式有个潜在的问题，因为它是基于已有的数据，并非是全部数据，所以难免会碰到新的数据新的规则的情况，这就有准确率的问题，也就是说老的规则判断新数据时出错。这就需要持续不断地学习，把新的数据和对应结果作为新的输入，让机器学习继续寻找规则，到达一定准确率后就可以发挥较大的价值了。</p>
-<p>其实通常的软件开发在一开始靠人工分析找出的规则也难免会有误差的，后面也需要根据新的情况不断完善规则提高准确率，这就要不断改进程序代码。</p>
-<h2 id="总结及深入"><a href="#总结及深入" class="headerlink" title="总结及深入"></a>总结及深入</h2><p>我们已经了解到机器学习是根据数据找规则，并且需要持续学习不断完善规则。机器学习有很多比较成熟的算法，大致分为有监督、无监督和强化学习几个类别。有监督的意思是有数据有结果，然后找内在的规则，就像上面鸢尾花的案例。无监督的意思是只有数据，需要找结果和规则，例如我们有很多会员，需要自动分类。强化学习是一个比较特定的领域，像自动驾驶就属于这个领域，需要根据数据输入很快反馈并不断改进规则。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2127,7 +2147,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
