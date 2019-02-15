@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="投资策略,基金投资," />
+  <meta name="keywords" content="数据库 分布式," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="估计有很多人不知道有一种比较新的基金品种，叫作定期支付基金，有点类似于以前银行的整存整取，但是以基金的方式运作的。最大的好处在于既能享受股票市场长期的较高收益，也能稳定获得现金流进账，很适合需要被动收入的人，以及有养老需求的老人。 这种基金具体是怎样运作的呢？ 购买方式跟普通基金是差不多的，可以在很多平台上直接买，差别在于赎回方式，一般是按照固定比例定期自动赎回一小部分。比如按每年投入资金6%的">
-<meta name="keywords" content="投资策略,基金投资">
+<meta name="description" content="过去一段时间有研究分布式数据库，什么是分布式数据库呢？ 分布式数据库区别于常见的主从架构数据库集群，首先数据存储是分布式的，分开存储在多台服务器上，但数据访问服务还是跟集中式类似，一般都有统一的访问入口。 一般常见的 MySQL 主从集群，是先有一个主服务实例，写数据操作一般是通过这个主服务实例完成的，然后会有多个从服务实例，是从主服务实例自动同步数据过来，从服务实例可以对外提供数据查询服务，一">
+<meta name="keywords" content="数据库 分布式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="推荐一种有趣的投资方式，轻松获取被动收入">
-<meta property="og:url" content="https://dengkane.github.io/2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/index.html">
+<meta property="og:title" content="对分布式数据库的实验和思考">
+<meta property="og:url" content="https://dengkane.github.io/2019/02/15/对分布式数据库的实验和思考/index.html">
 <meta property="og:site_name" content="Technology and Investing Blog">
-<meta property="og:description" content="估计有很多人不知道有一种比较新的基金品种，叫作定期支付基金，有点类似于以前银行的整存整取，但是以基金的方式运作的。最大的好处在于既能享受股票市场长期的较高收益，也能稳定获得现金流进账，很适合需要被动收入的人，以及有养老需求的老人。 这种基金具体是怎样运作的呢？ 购买方式跟普通基金是差不多的，可以在很多平台上直接买，差别在于赎回方式，一般是按照固定比例定期自动赎回一小部分。比如按每年投入资金6%的">
+<meta property="og:description" content="过去一段时间有研究分布式数据库，什么是分布式数据库呢？ 分布式数据库区别于常见的主从架构数据库集群，首先数据存储是分布式的，分开存储在多台服务器上，但数据访问服务还是跟集中式类似，一般都有统一的访问入口。 一般常见的 MySQL 主从集群，是先有一个主服务实例，写数据操作一般是通过这个主服务实例完成的，然后会有多个从服务实例，是从主服务实例自动同步数据过来，从服务实例可以对外提供数据查询服务，一">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://dengkane.github.io/images/money-1604921_640.jpg">
-<meta property="og:updated_time" content="2019-01-14T02:07:40.000Z">
+<meta property="og:image" content="https://dengkane.github.io/images/d-db.jpg">
+<meta property="og:updated_time" content="2019-02-15T02:43:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="推荐一种有趣的投资方式，轻松获取被动收入">
-<meta name="twitter:description" content="估计有很多人不知道有一种比较新的基金品种，叫作定期支付基金，有点类似于以前银行的整存整取，但是以基金的方式运作的。最大的好处在于既能享受股票市场长期的较高收益，也能稳定获得现金流进账，很适合需要被动收入的人，以及有养老需求的老人。 这种基金具体是怎样运作的呢？ 购买方式跟普通基金是差不多的，可以在很多平台上直接买，差别在于赎回方式，一般是按照固定比例定期自动赎回一小部分。比如按每年投入资金6%的">
-<meta name="twitter:image" content="https://dengkane.github.io/images/money-1604921_640.jpg">
+<meta name="twitter:title" content="对分布式数据库的实验和思考">
+<meta name="twitter:description" content="过去一段时间有研究分布式数据库，什么是分布式数据库呢？ 分布式数据库区别于常见的主从架构数据库集群，首先数据存储是分布式的，分开存储在多台服务器上，但数据访问服务还是跟集中式类似，一般都有统一的访问入口。 一般常见的 MySQL 主从集群，是先有一个主服务实例，写数据操作一般是通过这个主服务实例完成的，然后会有多个从服务实例，是从主服务实例自动同步数据过来，从服务实例可以对外提供数据查询服务，一">
+<meta name="twitter:image" content="https://dengkane.github.io/images/d-db.jpg">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="https://dengkane.github.io/2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/"/>
+  <link rel="canonical" href="https://dengkane.github.io/2019/02/15/对分布式数据库的实验和思考/"/>
 
 
 
@@ -138,7 +138,7 @@
 </script>        
 
 
-  <title>推荐一种有趣的投资方式，轻松获取被动收入 | Technology and Investing Blog</title>
+  <title>对分布式数据库的实验和思考 | Technology and Investing Blog</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2019/02/15/对分布式数据库的实验和思考/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ken Deng">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">推荐一种有趣的投资方式，轻松获取被动收入</h1>
+          <h1 class="post-title" itemprop="name headline">对分布式数据库的实验和思考</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T09:55:49+08:00">
-                2019-01-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-15T09:42:35+08:00">
+                2019-02-15
               </time>
             
 
@@ -327,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/投资/" itemprop="url" rel="index">
-                    <span itemprop="name">投资</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -345,9 +345,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/#comments" itemprop="discussionUrl">
+                <a href="/2019/02/15/对分布式数据库的实验和思考/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/02/15/对分布式数据库的实验和思考/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -375,19 +375,20 @@
       
 
       
-        <p><img src="/images/money-1604921_640.jpg" alt="invest fund"></p>
-<p>估计有很多人不知道有一种比较新的基金品种，叫作定期支付基金，有点类似于以前银行的整存整取，但是以基金的方式运作的。最大的好处在于既能享受股票市场长期的较高收益，也能稳定获得现金流进账，很适合需要被动收入的人，以及有养老需求的老人。</p>
-<p>这种基金具体是怎样运作的呢？</p>
-<p>购买方式跟普通基金是差不多的，可以在很多平台上直接买，差别在于赎回方式，一般是按照固定比例定期自动赎回一小部分。比如按每年投入资金6%的比例(计算到每个月是0.5%)每月赎回一小部分。</p>
-<p>这种基金的投资组合一般是混合式的，就是说同时持有股票和债券，这样能有效控制风险，而且根据资产配置理论，在收益方面也不错，经常比市场平均收益还高。</p>
-<p>通过这种定期支付基金可以帮助我们实现被动收入，举例说明，比如你投入了10万块，按每月0.5%自动赎回一小部分，那每月可以拿到500块。而且随着投资增值，可能每月拿到的赎回金额也逐步增大。假设几年后资金增值到15万，现在每月可以拿到750了。</p>
-<p>这种投资方式很适合在熊市阶段进入，后面只要抓到一波牛市，可能资金就能翻几倍，相应的每月现金流入也能翻几倍。</p>
-<p>有没有感觉这种投资方式类似于买房地产出租赚租金? 是的，运作方式上很类似，差别在于买房出租需要花时间和精力去打理，而这种定期支付基金不需要做什么打理。还有很重要的一点是，基金很容易变现，而房地产就不那么容易了，所以我个人更倾向于投资基金。</p>
-<p>下面推荐几个我在关注的定期支付基金：</p>
-<pre><code>519732  交银定期支付双息平衡混合
-
-000367 国泰安康定期支付混合A
-</code></pre><p>这几个基金都可以在支付宝上买到，祝您能获得越来越多的被动收入。</p>
+        <p><img src="/images/d-db.jpg" alt="分布式 数据库"></p>
+<p>过去一段时间有研究分布式数据库，什么是分布式数据库呢？</p>
+<p>分布式数据库区别于常见的主从架构数据库集群，首先数据存储是分布式的，分开存储在多台服务器上，但数据访问服务还是跟集中式类似，一般都有统一的访问入口。</p>
+<p>一般常见的 MySQL 主从集群，是先有一个主服务实例，写数据操作一般是通过这个主服务实例完成的，然后会有多个从服务实例，是从主服务实例自动同步数据过来，从服务实例可以对外提供数据查询服务，一般不用于写数据操作。</p>
+<p>这种主从架构一个比较大的问题是在数据量很大的时候，在存储方面难以满足需要，比如每天写入100G的数据，这么多数据首先要有足够的硬盘空间，还要有足够的网络带宽用于主从服务间同步数据。一般一台服务器能配置的硬盘空间是有限的，不太可能做到无限扩容，只能考虑分布式存储技术，也就是通过增加服务器的方式使存储空间做到水平扩展。这种扩展是存储层面的，可以通过例如 Hadoop 这种大数据技术实现一种分布式文件系统，然后挂载到服务器上当作硬盘空间来使用。</p>
+<p>而分布式数据库是从更高层面来解决上面的问题，数据是分开存放在多个服务实例上，这些服务实例可能使用普通的硬盘来存储数据，也可能使用分布式文件系统存储数据。比如有100条数据，有5个服务实例，可能每个服务实例保存了20条。这些服务实例也有机制来相互备份，通过多复本冗余存储的方式来做到数据高可用。</p>
+<p>这种多服务实例需要解决协调调度的问题，比如写入数据时应该写到哪个服务实例上，读数据时怎样能读取到所有的数据，或者怎么知道某条数据是存在哪个服务实例上。所以一般分布式数据库系统都有个用于协调和调度资源的服务，它就是用来解决读写数据时的资源调度问题。</p>
+<p>我测试了 TiDB 这个分布式数据库系统，它的分布式存储层叫 TiKV，是一个基于 Key-Value 机制的分布式存储系统。它的资源调度服务叫作 PD，就是用于协调数据访问服务的，PD 会告诉你写数据时写到哪个 TiKV 实例上，读数据时要从哪个 TiKV 实例上读。</p>
+<p>TiDB 比较牛的一方面是提供了一套兼容 MySQL 协议的关系数据库层，让你可以用 MySQL 的 SQL 语法来访问数据，这就大大提高了实用性，让很多已有的基于 MySQL 的应用系统可以很平滑的迁移过来。</p>
+<p>我是用 TiDB 来保存 ESB 平台的 API 调用日志记录，每天经常高达100万条记录以上，以前用 MySQL 保存时因为数据都是保存在一台服务器上，硬盘空间很快就满了，总是扩容硬盘空间又不现实，所以用上 TiDB 就解决了分布式存储的问题，我们用3台服务器，每台分担1/3的存储空间，而且可以追加服务器，来进一步分散，减少单台服务器的存储空间要求。</p>
+<p>在使用过程中，随着数据量越来越大，发现性能方面出现问题了，首先是查询数据时，因为单表记录数已经几亿级别了，每次查询都感觉比较慢，而且查询时 CPU 占用很高，导致数据写入方面也变慢，整体日志记录和查询服务的体验不太好。初步分析应该是在数据量到一定程度后，PD 分布式资源调度服务很繁忙，需要不断从各 TiKV 服务读取数据，比较容易导致服务器负荷增大。</p>
+<p>后来就思考其他解决方案，这种日志保存对数据一致性要求不高，主要是提供汇总数据，用于跟踪 ESB 平台的总体服务情况。我就考虑按每天一张表的方式来保存，查询时也按天，因为看到 TiDB 对 CPU 占用过高，就想用其他小型数据库来代替，存储方面最好能每天一个数据库文件，能压缩起来，方便移动到其他服务器上，解决分布式存储问题。</p>
+<p>根据以前的使用经验，我选择了 HSQLDB，这个是兼容标准 SQL 语法的一种小型数据库，可以内嵌到应用系统里，可以以一个文件的方式保存一个数据库。我们就把每天的 API 调用记录保存到一个数据文件，并压缩来节约硬盘空间，随时可以转移到其他服务器上。实际测试这种方案效果很好，用单台服务器就能满足以前几台服务器才能做的工作，而且服务器 CPU 负荷很低，响应很快。</p>
+<p>总结一下上面的经历，个人感觉分布式数据库系统也并非是万能的，它们也有自己的弱点，估计需要很大的服务器资源投入才能保证较好的数据服务，比如 Hadoop 大数据平台，动辄需要几十台服务器的环境，资源投入很大。而对于一些非关键型的应用场景，一些简单的解决方案可能更适合，所以要根据实际需要选择恰当的解决方案。</p>
 
       
     </div>
@@ -405,9 +406,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/投资策略/" rel="tag"># 投资策略</a>
-          
-            <a href="/tags/基金投资/" rel="tag"># 基金投资</a>
+            <a href="/tags/数据库-分布式/" rel="tag"># 数据库 分布式</a>
           
         </div>
       
@@ -420,8 +419,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/29/基于区块链技术的产品追溯体系/" rel="next" title="基于区块链技术的产品追溯体系">
-                <i class="fa fa-chevron-left"></i> 基于区块链技术的产品追溯体系
+              <a href="/2019/01/15/可靠而且低成本的贷款渠道/" rel="next" title="可靠而且低成本的贷款渠道">
+                <i class="fa fa-chevron-left"></i> 可靠而且低成本的贷款渠道
               </a>
             
           </div>
@@ -429,10 +428,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/15/可靠而且低成本的贷款渠道/" rel="prev" title="可靠而且低成本的贷款渠道">
-                可靠而且低成本的贷款渠道 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -712,9 +707,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://dengkane.github.io/2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/';
-          this.page.identifier = '2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/';
-          this.page.title = '推荐一种有趣的投资方式，轻松获取被动收入';
+          this.page.url = 'https://dengkane.github.io/2019/02/15/对分布式数据库的实验和思考/';
+          this.page.identifier = '2019/02/15/对分布式数据库的实验和思考/';
+          this.page.title = '对分布式数据库的实验和思考';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
