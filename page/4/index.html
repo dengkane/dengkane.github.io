@@ -269,6 +269,207 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/10/15/Grails-a-sharp-toolkit-for-Internet-software-development/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/15/Grails-a-sharp-toolkit-for-Internet-software-development/" itemprop="url">Grails, a sharp toolkit for Internet software development</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T12:13:21+08:00">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/15/Grails-a-sharp-toolkit-for-Internet-software-development/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/15/Grails-a-sharp-toolkit-for-Internet-software-development/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Grails，移动互联网时代服务器端开发的利器"><a href="#Grails，移动互联网时代服务器端开发的利器" class="headerlink" title="Grails，移动互联网时代服务器端开发的利器"></a>Grails，移动互联网时代服务器端开发的利器</h2><p>Grails 对国内的很多开发人员来说可能比较陌生，它是一个基于Groovy编程语言的开发框架，Groovy是基于JVM的一种动态编程语言，在Java语法基础上增加了很多有用的动态特性。</p>
+<p>目前移动互联网时代前端开发项目越来越多，包含有Android/iOS原生开发，还有HTML5开发。前端开发要跟后台服务器端交互，一般是通过调用服务器端HTTP API接口的方式，所以服务器端的API接口开发越来越重要。</p>
+<h3 id="为什么要选择-Grails-做服务器端API接口开发？"><a href="#为什么要选择-Grails-做服务器端API接口开发？" class="headerlink" title="为什么要选择 Grails 做服务器端API接口开发？"></a>为什么要选择 Grails 做服务器端API接口开发？</h3><p>首先，Grails 是基于Java虚拟机这个基础平台的，在 Grails 里可以很方便地调用Java代码，也就是说Java领域这么多年来所积累的各种各样的技术，在 Grails 框架上都可以发挥作用。这是一个很关键的因素，例如各种数据库驱动、各种网络协议开发包和最近比较流行的大数据方面的各种开发技术等，这些项目和产品首先会考虑支持Java。</p>
+<p>后端接口API要重点考虑后端系统整合问题，这样才可以为前端提供功能强大的接口，因此Java领域的各种技术沉淀是很宝贵的。例如很早以前的金融类的很多大型系统是用EJB技术开发的，如果在API接口里要实现跟EJB对接，这个就不是其他开发语言能做到的了。</p>
+<p>像目前的Node.js是基于JavaScript的服务器端开发技术平台，因为比较年轻，技术沉淀还不够多，所以在对接一些已有系统方面，相对薄弱一些。还有像Python和Ruby等，也是面临类似的问题。</p>
+<p>其次，Grails 大大简化了服务器端的开发工作。Grails 是基于 Spring MVC 和 Hibernate 技术的，最近的版本已经支持多种 NoSQL 数据库，然后进行了很大幅度的封装，简化了很多繁琐的处理，提供了简单而且一致的数据库层及Web层的开发标准。</p>
+<p>我们拿Java开发常用的一些开发技术为例探讨一下，比如数据库层，目前有很多选择，像JPA/Hibernate、JDO、iBatis/MyBatis 和 JDBC 等，你会选择哪一种？每个Java开发人员应该都有自己的偏好，由此引起的争论也总是比较激烈。</p>
+<p>这还仅仅是数据库层，在服务层和Web层又会有多种选择，所以从整套开发框架角度（Full Stack）看，这种技术组合就太多了。所以当一个Java开发人员到了一个新环境，往往会发现，这个新环境所用的Java的技术组合跟他以前用得是不一样的，所以只能花时间去学些这个新组合，要达到很熟练的程度需要花不少时间的，相信每个Java开发人员都会有这方面的体会。</p>
+<p>Grails 是基于主流的Java技术，例如 Spring MVC 和 Hibernate，然后进行封装，提供了一致的技术标准，对于后来的新技术支持也是类似。比如对于数据库层，基于Hibernate的数据库访问接口跟后来的基于NoSQL的数据库访问接口基本是一致的，开发人员不需要再去学习新的一套接口标准，所以可以把主要精力集中到具体业务应用的开发上面。</p>
+<p>最后，Grails 所基于的 Groovy 动态开发语言所带来的效率提升是巨大的。这方面举个例子会比较容易理解，每个开发团队做项目做久了都会积累一套自己的工具类库，这些工具类库把一些重复性的处理提供了简化的解决方案，比如以前一大堆代码要实现的功能现在调用一个工具类的函数就搞定了。</p>
+<p>如果这种工具类的函数积累的越来越多，对于原有团队的开发人员来说，开发效率应该是越来越高，这就是技术积累所发挥的作用。而基于这些函数开发出来的项目对于那些只熟悉标准Java技术的开发人员来讲，就难以理解了，感觉就像是一套新的开发技术一样。</p>
+<p>Groovy 跟这个道理类似，它把平时Java开发中一些常见的繁琐处理做了很多简化，以前要很多行代码实现的功能现在可能用1行代码就能做到了。但它更进了一步，是抽象到一套开发语言的层次了，不是简单的函数调用了，你用它的语法编程，它在后台为你自动完成相应工具类函数的调用。</p>
+<p>但 Groovy 在兼容 Java 标准语法方面考虑得很周到，绝大部分普通Java类可以直接作为 Groovy 代码来用，也就是说你以前写的一个类叫 Test.java，一般直接改文件名为 Test.groovy 就可以作为 Groovy 代码执行了。这个跟其他的基于Java的动态语言是不同的，例如Scala，是跟 Java 完全不同的一套编程语法，Scala这种学习曲线是很比较陡的，而 Groovy 相对就比较平缓，普通 Java 开发人员可以继续用 Java 的语法做开发，然后渐渐学习 Groovy 的特性，就可以越来越多地用 Groovy 语法了。</p>
+<h3 id="实际示例："><a href="#实际示例：" class="headerlink" title="实际示例："></a>实际示例：</h3><p>下面举个API开发的示例来体会一下 Grails 的效率。</p>
+<p>我们做一个简单的电话号码簿的查询接口。</p>
+<p>先定义一下数据模型：</p>
+<pre><code class="java"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>{
+   String name
+   String phoneNumer
+   String memo
+}
+
+上面是定义了一个 Grails domain 类，Grails 会自动同步创建数据库的表。
+
+然后做一个 Controller 类，写一个根据姓名查询对应电话号码的接口。
+
+<span class="class"><span class="keyword">class</span> <span class="title">PhoneApiController</span> </span>{
+   <span class="function">def <span class="title">queryPhone</span><span class="params">()</span> </span>{
+      <span class="comment">//拿到URL传递过来的查询参数</span>
+      def queryParameter1 = params.name
+      <span class="comment">//调用domain类的查询接口，这些接口是 Grails 自动提供的，不需要我们写什么代码</span>
+      def phone = Phone.findByName(queryParameter1)
+
+      <span class="comment">//如果查询到结果</span>
+      <span class="keyword">if</span> (phone) {
+         <span class="comment">//把查询结果以JSON格式返回给调用端</span>
+         render phone as JSON
+      } <span class="keyword">else</span> {
+         <span class="comment">//返回错误信息给调用端，一般需要封装一个 errorCode 返回值用于调用端识别是否没有查询到结果，这里只是简单返回错误信息</span>
+         render <span class="string">"查不到电话号码"</span>
+      }
+   }
+}
+</code></pre>
+<p>上面的这个接口可以通过这个 URL 来调用：</p>
+<p>http://服务器IP:端口/项目名/phoneApi/queryPhones?name=张三</p>
+<p>是不是很简单，很容易理解？</p>
+<p>Grails 对于提高服务器端的开发效率很有帮助，建议Java开发人员了解学习一下，并且可以考虑应用到具体项目中。当你熟练掌握 Grails 的时候，你会觉得写代码也可以是很美妙的事情，因为你可以专注于要解决的实际业务需求，而不是翻来覆去地折腾开发框架方面的问题。特别是对于移动互联网时代的开发，这种快速开发服务器端接口的能力是很重要的，而同时也不需要放弃以前Java领域那么多的技术积累。</p>
+<p>注：附件是本文中示例的源代码，可以直接运行，示例用的是 Grails 2.3.11 版本。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/10/11/Best-and-Simple-Machine-Learning-Explaination/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -918,7 +1119,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
