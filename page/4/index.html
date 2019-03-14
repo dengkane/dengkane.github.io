@@ -269,6 +269,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/10/26/一个基于-Groovy-闭包实现的低侵入缓存设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/26/一个基于-Groovy-闭包实现的低侵入缓存设计/" itemprop="url">一个基于 Groovy 闭包实现的低侵入缓存设计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-26T09:18:53+08:00">
+                2018-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/26/一个基于-Groovy-闭包实现的低侵入缓存设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/26/一个基于-Groovy-闭包实现的低侵入缓存设计/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>缓存技术是目前很常用的一种技术，当你的系统的并发访问到达一定数量级后，后台的数据库就难以应付了，需要考虑缓存技术，但缓存又会涉及到如何跟数据库保持数据同步的问题。这篇文章介绍一个基于 Groovy 闭包技术实现的低侵入方案。</p>
+<h2 id="基本设计思路"><a href="#基本设计思路" class="headerlink" title="基本设计思路"></a>基本设计思路</h2><p>读取数据时优先从缓存读取，缓存没有时从数据库读取，同时写到缓存中，隔一定时间后触发缓存刷新。</p>
+<h2 id="实现说明"><a href="#实现说明" class="headerlink" title="实现说明"></a>实现说明</h2><h3 id="定义一个统一的服务方法"><a href="#定义一个统一的服务方法" class="headerlink" title="定义一个统一的服务方法"></a>定义一个统一的服务方法</h3><p>这个服务方法能同时完成基本设计思路里的几个方面，这个服务方法名字为 getLazyCache，参数分别是：</p>
+<p>cacheKey：缓存 key 名；<br>refreshClosure：获取对应数据的闭包方法；<br>closureParams：闭包方法需要的参数，是 Map 类型；<br>expireSeconds：缓存超时时间，单位是秒，缓存服务器会自动清除超时的缓存；</p>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先定义一个闭包方法，方法里写读取数据库数据的代码，下面的例子是根据传参 appId 通过 Grails 的 GORM 方法查询数据，</span></span><br><span class="line"><span class="comment">//并转成 JSON 格式，以 String 类型返回（这是为了方便保存到 Redis 缓存里，采用 JSON 格式序列化数据）。</span></span><br><span class="line">def refreshClosure = &#123; paramsMap -&gt;</span><br><span class="line">    def appId = paramsMap.appId</span><br><span class="line">    <span class="keyword">return</span> String.valueOf(AppInfo.findAll(<span class="string">'from AppInfo where id = ?'</span>, [appId]) as JSON)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">def closureParams = [<span class="string">'appId'</span>: <span class="string">'test_app_001'</span>]</span><br><span class="line"></span><br><span class="line">def cacheValue = getLazyCache(<span class="string">'CACHE_'</span> + closureParams.appId, refreshClosure, closureParams, <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>上面就是使用方法，很简单，而且能自己定义读取数据库数据的方式，getLazyCache 会先根据 cacheKey 去缓存中查是否存在，存在就直接返回，不存在就调用 refreshClosure 这个闭包方法重新读取，读取后写到缓存并返回。</p>
+<h3 id="getLazyCache-实现代码"><a href="#getLazyCache-实现代码" class="headerlink" title="getLazyCache 实现代码"></a>getLazyCache 实现代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">getLazyCache</span><span class="params">(cacheKey, refreshClosure, closureParams, expireSeconds)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//getCache 是一个已有的读取缓存的方法，这里直接调用</span></span><br><span class="line">    def cacheValue = getCache(cacheKey)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果查不到缓存就调用刷新缓存的闭包方法读取数据，并写到缓存</span></span><br><span class="line">    <span class="keyword">if</span> (cacheValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//调用闭包方法</span></span><br><span class="line">        cacheValue = refreshClosure.call(closureParams)</span><br><span class="line">        <span class="comment">//putCache 是已有的方法，写缓存，并设置超时时间</span></span><br><span class="line">        putCache(cacheKey, cacheValue, expireSeconds)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cacheValue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是整个实现方案，清晰易懂，而且对已有代码影响比较小，能够快速实现缓存功能，大大提高系统的并发容量。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/10/16/Trying-TiDB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1281,7 +1441,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
