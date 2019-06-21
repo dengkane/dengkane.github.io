@@ -269,6 +269,263 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-09-第九章-Web开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/七天学会Python编程-09-第九章-Web开发/" itemprop="url">七天学会Python编程 -- 第九章 Web开发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T13:54:02+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/19/七天学会Python编程-09-第九章-Web开发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/19/七天学会Python编程-09-第九章-Web开发/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="9-1-Web-基础"><a href="#9-1-Web-基础" class="headerlink" title="9.1 Web 基础"></a>9.1 Web 基础</h2><p>大家都知道上网，不管是通过电脑，还是手机或平板电脑，这里讲讲 Web 的一些基础内容。</p>
+<p>首先我们用来上网的设备都会有个软件叫浏览器，浏览器的形式可能是多种多样的，例如常见的 IE 浏览器和 Chrome 谷歌浏览器，属于标准的浏览器软件，还有像在微信中打开一些页面的形式，是属于微信中内嵌的浏览器，还有些 APP 解析一些网页内容后只显示网页的部分内容，这也属于浏览器的一种形式。</p>
+<p>然后浏览器访问的服务器叫作 Web 服务器，Web 服务器返回给浏览器网页内容，浏览器解析后显示出来。网页是用一种叫作 HTML 的标记型语言写的，一个简单的网页可以是这样的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>这是标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">这里是内容</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>整个过程是这样：浏览器访问一个网址，网址对应到一个 Web 服务器，Web 服务器会把网页内容返回给浏览器，浏览器解析网页内容后显示出来。</p>
+<p>网页内容可以是保存在一个扩展名为 .html 的文件，例如 test.html，也可以是一个 Python 程序生成的，我们这一章会讲怎样通过 Python 程序开发网页功能。</p>
+<h2 id="9-2-安装一个比较热门的-Web-开发框架"><a href="#9-2-安装一个比较热门的-Web-开发框架" class="headerlink" title="9.2 安装一个比较热门的 Web 开发框架"></a>9.2 安装一个比较热门的 Web 开发框架</h2><p>我们会用 Flask，Flask 是一个比较流行的 Python Web 开发框架，优点是简单易懂，可以很快上手，开发网页程序。</p>
+<p>这里先要安装这个框架，这个框架可以看作是比较复杂的模块，我们要学习怎么安装它。</p>
+<p>如果你使用了树莓派或其他 Linux 环境，安装 Flask 很简单，只需要这个命令</p>
+<p>pip install Flask</p>
+<p>这个命令会把 Flask 和 Flask 所用到的其他模块都一起安装好。</p>
+<p>在 Windows 下安装复杂一些，一般是先安装上 pip 这个 Python 包管理工具，然后也是通过 pip install Flask 命令来安装。</p>
+<p>可以参考这篇教程上安装 pip 工具的方法安装好 pip，然后也是通过 pip install Flask 安装 Flask 框架。</p>
+<p>windows下面安装Python和pip终极教程</p>
+<p><a href="http://www.cnblogs.com/yuanzm/p/4089856.html" target="_blank" rel="noopener">http://www.cnblogs.com/yuanzm/p/4089856.html</a></p>
+<p>这里概要总结一下安装过程，先安装 Python，记得把 Python 的安装目录和下面的 Scripts 目录加到系统路径中，如果你的 Python 安装在 C:\Python27 目录下，就把 C:\Python27 和 C:\Python27\Scripts 这两个目录加到系统路径下。</p>
+<p>然后从这个网址下载 pip 安装包</p>
+<p><a href="https://pypi.python.org/pypi/pip#downloads" target="_blank" rel="noopener">https://pypi.python.org/pypi/pip#downloads</a></p>
+<p>记得下载扩展名为 .tar.gz 的，下载下来后是个压缩包格式，可以用 WinRAR 或其他解压缩工具解压缩到一个目录下，然后从命令行里 cd 这个解压缩后的目录下，执行命令 python setup.py install，就可以安装好 pip 工具。</p>
+<p>安装好后在命令行里运行 pip install Flask 就可以顺利安装 Flask 框架。</p>
+<h2 id="9-3-做一个简单的页面"><a href="#9-3-做一个简单的页面" class="headerlink" title="9.3 做一个简单的页面"></a>9.3 做一个简单的页面</h2><p>现在我们开始学习用 Flask 做一个简单的页面，是在页面上打印 “Hello World!”。</p>
+<p>先建一个保存这次程序的目录，保存下面代码为 hello.py：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route("/")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello World!"</span></span><br></pre></td></tr></table></figure>
+<p>逐行解释一下，第一行是指引入 Flask 模块，这个指令跟我们以前章节学过的不太一样，它是从 flask 这个模块包里引入 Flask 模块，模块包的概念我们在模块章节有讲过，是为了进一步对模块做分类，特别是对于一些复杂的模块，有必要再分模块包。</p>
+<p>第二行是定义一个 Flask 对象类型，并赋给 app 变量，<strong>name</strong> 是 Python 内置的一个变量，主要 name 前后分别是两个下划线，这个内置变量的值是当前运行的程序名字，对于主程序来说这个值是 <strong>main</strong>，如果在一个模块中这个值会是模块的名字。app = Flask(<strong>name</strong>) 是定义一个对象，<strong>name</strong> 作为初始参数，对象类型是 Flask，把定义的对象赋给变量 app。</p>
+<p>第三行 @app.route(“/“) 是 Flask 框架的一种使用方式，表示定义一个网址路径，“/” 表示是根目录，就像我们访问百度这个网址 <a href="http://www.baidu.com/" target="_blank" rel="noopener">http://www.baidu.com/</a> 时，对应的就是 “/” 这样一个根目录网址路径。</p>
+<p>第四行和第五行是定义一个函数，返回一个字符串。</p>
+<p>在 Linux 环境下，在命令行里执行这个命令</p>
+<p>FLASK_APP=hello.py flask run</p>
+<p>如果在 Windows 环境下，要在命令行状态下，执行两条命令，先执行第一条，再执行第二条：</p>
+<p>set FLASK_APP=hello.py</p>
+<p>flask run</p>
+<p>命令行里提示这样的信息</p>
+<ul>
+<li><p>Serving Flask app “hello”</p>
+</li>
+<li><p>Running on <a href="http://127.0.0.1:5000/" target="_blank" rel="noopener">http://127.0.0.1:5000/</a> (Press CTRL+C to quit)</p>
+</li>
+</ul>
+<p>后表示 Web 服务已经成功运行起来了，同时按 CTRL 键和 C 键会退出服务。</p>
+<p>你现在可以用浏览器访问网址 <a href="http://127.0.0.1:5000/" target="_blank" rel="noopener">http://127.0.0.1:5000/</a> 就可以看到打印出来的 “Hello World!”。</p>
+<p>解释一个这个命令，FLASK_APP=hello.py 是定义一个环境变量，然后执行 flask run 命令，flask run 命令里会用到 FLASK_APP 环境变量里定义的那个文件名字，就会运行起来。</p>
+<p>下面继续完善一下，输出一个真正的网页，我们把前面章节那段 HTML 输出，上面代码这样修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route("/")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'''&lt;html&gt;</span></span><br><span class="line"><span class="string">            &lt;head&gt;</span></span><br><span class="line"><span class="string">                &lt;h1&gt;This is a head&lt;/h1&gt;</span></span><br><span class="line"><span class="string">            &lt;/head&gt;</span></span><br><span class="line"><span class="string">            &lt;body&gt;</span></span><br><span class="line"><span class="string">                This is the content.</span></span><br><span class="line"><span class="string">            &lt;/body&gt;</span></span><br><span class="line"><span class="string">            &lt;/html&gt;'''</span></span><br></pre></td></tr></table></figure>
+<p>留意一下那个 hello 函数中的 return 指令，是返回一个字符串，因为这个字符串是跨多行的，所以用了 Python 的一种特殊用法，可以前后用三个单引号或三个双引号把多行字符串括起来，我们也用缩进的方式提高可读性。</p>
+<p>按 CTRL + C 退出服务后再启动，再访问一下网址 <a href="http://127.0.0.1:5000/" target="_blank" rel="noopener">http://127.0.0.1:5000/</a> 试试，能看到一个真正网页的显示内容，有标题有内容。</p>
+<h2 id="9-4-做一个比较复杂的网页功能"><a href="#9-4-做一个比较复杂的网页功能" class="headerlink" title="9.4 做一个比较复杂的网页功能"></a>9.4 做一个比较复杂的网页功能</h2><p>这一节我们尝试做一个比较复杂的网页功能，是管理联系人信息，我们维护一个类似下面的数据表格：</p>
+<p>Name Mobile</p>
+<p>John 1300000</p>
+<p>Tom 1350000</p>
+<p>Mary 1380000</p>
+<p>首先讲一下怎样保存这样的表格数据，我们可以使用列表，过去我们学过的列表是保存多个数值，其实列表可以保存绝大多数对象，也可以保存列表对象。比如这样的列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br></pre></td></tr></table></figure>
+<p>是保存了3个数字，而这样的列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = [ [<span class="string">"John"</span>, <span class="string">"1300000"</span>], [<span class="string">"Tom"</span>, <span class="string">"1350000"</span>], [<span class="string">"Mary"</span>, <span class="string">"1380000"</span>] ]</span><br></pre></td></tr></table></figure>
+<p>是保存了3个列表对象，我们可以用 b[0] 获取第一个列表对象，b[1] 获取第二个列表对象，依次类推。</p>
+<p>我们就是利用这种列表来保存这次的联系人数据，然后再用我们保存对象到文件的方法把这个大列表保存到硬盘一个文件里，这样可以以后再加载出来。</p>
+<h3 id="联系人清单功能"><a href="#联系人清单功能" class="headerlink" title="联系人清单功能"></a>联系人清单功能</h3><p>我们首先做个网页，是显示已有的联系人清单，然后做个新增的功能，可以增加新联系人，然后再做一个删除联系人的功能，这样基本的联系人管理功能就具备了。</p>
+<p>参考前面章节的简单页面的例子，先写一下显示联系人清单的页面功能，这一次我们保存程序文件为 contacts.py。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data_from_file</span><span class="params">(filePath)</span>:</span></span><br><span class="line">  file = open(filePath, <span class="string">"rb"</span>)</span><br><span class="line">  dataObject = pickle.load(file)</span><br><span class="line">  <span class="keyword">return</span> dataObject</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_data_to_file</span><span class="params">(filePath, dataObject)</span>:</span></span><br><span class="line">  file = open(filePath, <span class="string">"wb"</span>)</span><br><span class="line">  pickle.dump(dataObject, file)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route("/init")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init</span><span class="params">()</span>:</span></span><br><span class="line">  b = [ [<span class="string">"John"</span>, <span class="string">"1300000"</span>], [<span class="string">"Tom"</span>, <span class="string">"1350000"</span>], [<span class="string">"Mary"</span>, <span class="string">"1380000"</span>] ]</span><br><span class="line">  save_data_to_file(<span class="string">"contacts.dat"</span>, b)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"Init successfully."</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route("/list")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list</span><span class="params">()</span>:</span></span><br><span class="line">  webContent = <span class="string">'''&lt;html&gt;</span></span><br><span class="line"><span class="string">  &lt;head&gt;</span></span><br><span class="line"><span class="string">  &lt;h1&gt;Contacts Management&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;/head&gt;</span></span><br><span class="line"><span class="string">  &lt;body&gt;'''</span></span><br><span class="line"></span><br><span class="line">  webContent = webContent + <span class="string">"&lt;table&gt;&lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Mobile&lt;/td&gt;&lt;/tr&gt;"</span></span><br><span class="line"></span><br><span class="line">  dataList = load_data_from_file(<span class="string">"contacts.dat"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> contact <span class="keyword">in</span> dataList:</span><br><span class="line">    webContent = webContent + <span class="string">"&lt;tr&gt;&lt;td&gt;"</span> + contact[<span class="number">0</span>] + <span class="string">"&lt;/td&gt;&lt;td&gt;"</span> + contact[<span class="number">1</span>] + <span class="string">"&lt;/td&gt;&lt;/tr&gt;"</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;/table&gt;"</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;/body&gt;&lt;/html&gt;"</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> webContent</span><br></pre></td></tr></table></figure>
+<p>启动 Flask 后先访问网址 <a href="http://127.0.0.1:5000/init" target="_blank" rel="noopener">http://127.0.0.1:5000/init</a> 初始化一些数据，然后再访问网址 <a href="http://127.0.0.1:5000/list" target="_blank" rel="noopener">http://127.0.0.1:5000/list</a> 可以看到显示的联系人清单。</p>
+<p>这段代码涉及内容比较多，先自己读一下看能否理解。</p>
+<p>程序的主体部分跟前面章节的简单页面例子差不多，只是多了两个对应不同网址的函数，一个是 /init 对应方法 init，这个方法是先初始化一点数据，另一个是 /list 对应方法 list，用于显示已有的联系人信息。</p>
+<p>还有两个函数一个是用于保存数据的 save_data_to_file，另一个是加载数据的 load_data_from_file，留意一下函数所用的参数。</p>
+<p>在 list 函数里有 webContent 这个变量，是用于保存网页内容，这次我们的网页内容是通过程序动态生成的，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webContent = webContent + <span class="string">"html codes"</span></span><br></pre></td></tr></table></figure>
+<p>这种用法是在 webContent 后面追加 “html codes” 这个字符串，例如一开始 webContent 内容是 “web content “，执行了上面代码后 webContent 内容变为 “web content html codes”。在 list 函数里用了很多这种方式来组装网页内容，最后再返回给用户的浏览器端显示出来。</p>
+<p>网页代码方面，里面用了几种 HTML 标签语法，主要是 table，table 是用于定义一个表格，里面通过 tr 标签定义行，然后通过 td 标签定义列，具体用法可以自己上网搜索一下。</p>
+<p>list 方法的主要目的是组装网页代码，其中表格里面的内容是根据联系人数据生成的，以后在联系人数据变化时网页显示内容也会跟着变化。</p>
+<h3 id="增加联系人功能"><a href="#增加联系人功能" class="headerlink" title="增加联系人功能"></a>增加联系人功能</h3><p>下面再加上增加联系人功能，我们在联系人表格下面增加一个输入表单，用到 form 相关的 HTML 标签语法，主要是输入框和提交按钮等。这里只显示 list 方法的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route("/list")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list</span><span class="params">()</span>:</span></span><br><span class="line">  webContent = <span class="string">'''&lt;html&gt;</span></span><br><span class="line"><span class="string">  &lt;head&gt;</span></span><br><span class="line"><span class="string">  &lt;h1&gt;Contacts Management&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;/head&gt;</span></span><br><span class="line"><span class="string">  &lt;body&gt;'''</span></span><br><span class="line"></span><br><span class="line">  webContent = webContent + <span class="string">"&lt;table&gt;&lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Mobile&lt;/td&gt;&lt;/tr&gt;"</span></span><br><span class="line"></span><br><span class="line">  dataList = load_data_from_file(<span class="string">"contacts.dat"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> contact <span class="keyword">in</span> dataList:</span><br><span class="line">    webContent = webContent + <span class="string">"&lt;tr&gt;&lt;td&gt;"</span> + contact[<span class="number">0</span>] + <span class="string">"&lt;/td&gt;&lt;td&gt;"</span> + contact[<span class="number">1</span>] + <span class="string">"&lt;/td&gt;&lt;/tr&gt;"</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;/table&gt;"</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;form action='/save_contact' method='post'&gt;Name: &lt;input type='text' name='name'/&gt; Mobile: &lt;input type='text' name='mobile'/&gt; &lt;input type='submit'/&gt;&lt;/form&gt;"</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;/body&gt;&lt;/html&gt;"</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> webContent</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，是增加了一行代码，这行代码是增加联系人表单的 HTML 网页代码，可以上网搜索 “html form” 这样的关键词去搜索一下相关内容。</p>
+<p>在 form 网页里有个 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">'/save_contact'</span> <span class="attr">method</span>=<span class="string">'post'</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里的 action 意思是用户点击 “提交” 按钮是传给哪个函数，这个函数会负责把用户录入的数据保存起来，method=’post’ 表示表单提交的方式，”post” 是表单比较常用的提交方式。</p>
+<p>我们需要在程序里加一个 save_contact 函数，下面只显示这个函数的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route("/save_contact", methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_contact</span><span class="params">()</span>:</span></span><br><span class="line">  name = request.form.get(<span class="string">"name"</span>)</span><br><span class="line">  mobile = request.form.get(<span class="string">"mobile"</span>)</span><br><span class="line"></span><br><span class="line">  dataList = load_data_from_file(<span class="string">"contacts.dat"</span>)</span><br><span class="line">  dataList.append( [name, mobile] )</span><br><span class="line">  save_data_to_file(<span class="string">"contacts.dat"</span>, dataList)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">'''&lt;html&gt;</span></span><br><span class="line"><span class="string">  &lt;head&gt;&lt;h3&gt;Add successfully!&lt;/h3&gt;&lt;/head&gt;</span></span><br><span class="line"><span class="string">  &lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;a href="/list"&gt;Click to return&lt;/a&gt;</span></span><br><span class="line"><span class="string">  &lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;/html&gt;</span></span><br><span class="line"><span class="string">  '''</span></span><br></pre></td></tr></table></figure>
+<p>解释一下这段代码，@app.route(“/save_contact”, methods=[‘GET’, ‘POST’]) 这行里除了定义网址信息以外，还定义了允许的调用方式，”GET” 和 “POST” 是 Web 应用领域的概念，是指数据提交方式，现在可以不用太深究，只记住比较常用的是 “POST” 方式就可以。</p>
+<p>按 CTRL + C 停止 Web 服务后再用命令 FLASK_APP=contacts.py flask run 启动服务，访问网址 <a href="http://127.0.0.1:5000/list" target="_blank" rel="noopener">http://127.0.0.1:5000/list</a> 可以查看已有的联系人清单，在清单下面有两个输入框，一个是输入名字的，另一个是输入手机号码的，还有个 “提交” 按钮，输入你要增加的联系人的名字和手机号码后点 “提交” 按钮就可以保存数据，会转到一个提示保存成功的页面，点击上面的返回连接可以返回到联系人清单显示页面。</p>
+<h3 id="删除联系人功能"><a href="#删除联系人功能" class="headerlink" title="删除联系人功能"></a>删除联系人功能</h3><p>删除联系人是在联系人清单表格的每行后面增加一个删除链接，用户点击时会调用我们一个函数，这个函数拿到要删除的联系人信息后进行删除操作，然后提示操作成功，用户可以返回到清单显示界面。</p>
+<p>这里我们要学习一个列表的操作方法，是删除某个数据的方法，看下面代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span>(a[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<p>这段代码运行打印输出的列表数据只有2个，10 和 30，第二个数字 20 被删掉了，这就是对列表数据的删除操作。类似道理，如果想删除联系人清单中某一条数据，可以通过列表索引值的方式删除。</p>
+<p>比如这个列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = [ [<span class="string">"John"</span>, <span class="string">"1300000"</span>], [<span class="string">"Tom"</span>, <span class="string">"1350000"</span>], [<span class="string">"Mary"</span>, <span class="string">"1380000"</span>] ]</span><br></pre></td></tr></table></figure>
+<p>用 del(b[1]) 的方式就可以删掉上面列表中的第二个子列表对象，也就是删除第二行数据。</p>
+<p>下面开始我们的删除联系人代码，先在清单列表显示中增加删除链接：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route("/list")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list</span><span class="params">()</span>:</span></span><br><span class="line">  webContent = <span class="string">'''&lt;html&gt;</span></span><br><span class="line"><span class="string">  &lt;head&gt;</span></span><br><span class="line"><span class="string">  &lt;h1&gt;Contacts Management&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;/head&gt;</span></span><br><span class="line"><span class="string">  &lt;body&gt;'''</span></span><br><span class="line"></span><br><span class="line">  webContent = webContent + <span class="string">"&lt;table&gt;&lt;tr&gt;&lt;td&gt;Name&lt;/td&gt;&lt;td&gt;Mobile&lt;/td&gt;&lt;td&gt; &lt;/td&gt;&lt;/tr&gt;"</span></span><br><span class="line"></span><br><span class="line">  dataList = load_data_from_file(<span class="string">"contacts.dat"</span>)</span><br><span class="line"></span><br><span class="line">  index = <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> contact <span class="keyword">in</span> dataList:</span><br><span class="line">    webContent = webContent + <span class="string">"&lt;tr&gt;&lt;td&gt;"</span> + contact[<span class="number">0</span>] + <span class="string">"&lt;/td&gt;&lt;td&gt;"</span> + contact[<span class="number">1</span>] + \</span><br><span class="line">    <span class="string">"&lt;/td&gt;&lt;td&gt;&lt;a href='/delete_contact?index="</span> + index + <span class="string">"'&gt;Delete&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;"</span></span><br><span class="line">    index = index + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;/table&gt;"</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;form action='/save_contact' method='post'&gt;Name: &lt;input type='text' name='name'/&gt; Mobile: &lt;input type='text' name='mobile'/&gt; &lt;input type='submit'/&gt;&lt;/form&gt;"</span></span><br><span class="line"></span><br><span class="line">    webContent = webContent + <span class="string">"&lt;/body&gt;&lt;/html&gt;"</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> webContent</span><br></pre></td></tr></table></figure>
+<p>上面代码中，我们是在 table 标签里增加了一个列，这个列为每行数据放一个删除链接，在连接里我们用到一个 index 变量，是记录循环遍历列表时的索引值，并作为参数通过 /delete_contact?index=某数值 的方式传递给 /delete_contact 这个网址，这个网址对应一个函数，是我们要增加的，这个函数会根据列表索引值删除对应的记录。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route("/delete_contact", methods=['GET'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_contact</span><span class="params">()</span>:</span></span><br><span class="line">  index = request.args.get(<span class="string">'index'</span>)</span><br><span class="line"></span><br><span class="line">  dataList = load_data_from_file(<span class="string">"contacts.dat"</span>)</span><br><span class="line">  <span class="keyword">del</span>( dataList[int(index)] )</span><br><span class="line">  save_data_to_file(<span class="string">"contacts.dat"</span>, dataList)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">'''&lt;html&gt;</span></span><br><span class="line"><span class="string">  &lt;head&gt;&lt;h3&gt;Delete successfully!&lt;/h3&gt;&lt;/head&gt;</span></span><br><span class="line"><span class="string">  &lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;a href="/list"&gt;Click to return&lt;/a&gt;</span></span><br><span class="line"><span class="string">  &lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;/html&gt;</span></span><br><span class="line"><span class="string">  '''</span></span><br></pre></td></tr></table></figure>
+<p>解释一下这段代码，@app.route(“/delete_contact”, methods=[‘GET’]) 这行定义了网址，也定义了允许的调用方式为 GET，也就是通过网址传递参数的方式，例如像 /delete_contact?index=某数值 这样。</p>
+<p>代码里关键是先拿到网址里传得参数 index，是这一行 index = request.args.get(‘index’)，这是 Flask 框架提供的方法，然后从文件中加载数据，然后用 del( dataList[int(index)] ) 删除对应索引值的列表对象，里面有个 int(index) 用法，这里 index 变量是字符串类型，从网址里传的值默认是字符串类型，要先转成数字类型才能在这里用。</p>
+<p>删除成功后保存最新列表到数据文件中，然后显示删除成功的信息，用户可以点击返回到清单显示页面。</p>
+<p>到现在为止，我们已经完成了这次复杂的网页功能开发，具备比较完整的数据管理功能，可以用来管理联系人信息。</p>
+<p>恭喜你学到了这么多内容！</p>
+<h2 id="9-5-实践练习时间"><a href="#9-5-实践练习时间" class="headerlink" title="9.5 实践练习时间"></a>9.5 实践练习时间</h2><p>过去章节我们学习了 Web 开发相关内容，下面通过实践练习来加深理解。</p>
+<p>练习1：</p>
+<p>仿照那个联系人管理功能开发一个考试成绩管理网页功能，数据列有 姓名、语文、数学、英语，能够显示清单，能够增加和删除。</p>
+<p>注意：如果程序里有中文字符，需要在程序第一行放这行代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br></pre></td></tr></table></figure>
+<p>以防止报错，这样代码是让 Python 程序支持中文字符。</p>
+<p>练习2：</p>
+<p>在练习1中我们是用列表中再用列表来表示每行数据的方式，在这个基础上调整一下程序，改成列表中用字典的方式实现这个程序，也就是说数据存储是这样的：</p>
+<p>[ {“name”: “John”, “mobile”: “1300000”}, {“name”: “Tom”, “mobile”: “1350000”}, {“name”: “Mary”, “mobile”: “1380000”} ]</p>
+<p>保存到文件和从文件加载数据时是对整个列表，而列表内部的每行数据是按字典格式存储。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-08-第八章-数据分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1983,171 +2240,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-000-前言/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ken Deng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technology and Investing Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/19/七天学会Python编程-000-前言/" itemprop="url">七天学会Python编程 -- 前言</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T11:33:55+08:00">
-                2018-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/19/七天学会Python编程-000-前言/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/19/七天学会Python编程-000-前言/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="关于这本书"><a href="#关于这本书" class="headerlink" title="关于这本书"></a>关于这本书</h2><p>你想学会当下最火热的编程吗？你想成为一名计算机专家吗？你想在你的朋友面前炫耀一下你的高超技术吗？那么请从此书开始这条成功之路吧。</p>
-<p>这本书由浅入深，从刚开始的变量，字符串到后续的Web开发，甚至做出复杂网页功能 ……应有尽有。初学者阅读这本书，能深深爱上编程；技术人员阅读之后，能产生更深层的思考……</p>
-<h2 id="未来发展趋势"><a href="#未来发展趋势" class="headerlink" title="未来发展趋势"></a>未来发展趋势</h2><p>人工智能随着当今社会的发展变得越来越重要，未来AI会替代人们打扫卫生、搬运木材，甚至还可以开车……而人工智能的实现跟编程息息相关。近期，政府也提出倡议，在中小学开设编程课程。作者针对目前时代的发展，认为有必要让新一代青少年和工作者学会编程并运用它。</p>
-<p>有人问：”现在收入最高的产业是什么？”可以毫不犹豫地说是游戏产业。王者荣耀，一款moba类游戏，它仅仅靠一个限定皮肤就在一天收入了1.5个亿。光是这个游戏，就已经打垮了全国80%的上市公司，这在10年前都是不可想象的，也最直接地验证了“科技是第一生产力”这句话。精通了程序开发，你完全可以开发出游戏，创造出不可估量的价值。</p>
-<h2 id="作者的话"><a href="#作者的话" class="headerlink" title="作者的话"></a>作者的话</h2><p>我是Tim Deng，Ken Deng的儿子。刚开始学编程的时候，我也同样和很多人一样，觉得特别困难。在程序里的很多东西都很抽象。我原来是记忆程序来学习编程的，但如果程序要求变动一下，那你就会一脸懵。所以无论如何不要死记硬背，理解之后要举一反三，才能真正精通编程。下面我列举几个难点，也是我的学习经验：</p>
-<ol>
-<li>理解函数的作用和定义</li>
-<li>对读写文件一定要深入理解</li>
-<li>对模块要有清晰的概念</li>
-</ol>
-<p>这就是三大重点难点，只要理解，就会变得简单。</p>
-<p>最后，勇敢地打开第一页吧，因为你已经走上了一条成功的路。</p>
-<p>Tim Deng<br>2017-10</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2198,7 +2290,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2220,7 +2312,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
