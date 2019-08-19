@@ -269,6 +269,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-05-第五章-函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/七天学会Python编程-05-第五章-函数/" itemprop="url">七天学会Python编程 -- 第五章 函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T12:12:01+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/19/七天学会Python编程-05-第五章-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/19/七天学会Python编程-05-第五章-函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="5-1-什么是函数？为什么要用函数？"><a href="#5-1-什么是函数？为什么要用函数？" class="headerlink" title="5.1 什么是函数？为什么要用函数？"></a>5.1 什么是函数？为什么要用函数？</h2><p>什么是函数？</p>
+<p>函数是专门定义的一个程序块，可以被其他程序块重复使用。这个描述有点抽象，可以举个例子，比如计算两个数的平均数，按照一般逻辑是要这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">c = a + b</span><br><span class="line">d = c / <span class="number">2</span></span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<p>后面的三行是平均数计算程序，先把两个变量加起来，然后除以2。这里就可以把这部分定义成一个函数，类似这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">average_two_numbers</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    c = a + b</span><br><span class="line">    d = c / <span class="number">2</span></span><br><span class="line">    print(d)</span><br></pre></td></tr></table></figure>
+<p>使用函数是这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br><span class="line">average_two_numbers(a, b)</span><br></pre></td></tr></table></figure>
+<p>这个 average_two_numbers 函数是定义了一个程序块，能接收2个参数 a 和 b，然后会计算两个数字的平均数并打印出来，这个函数可以被重复使用的，你可以传入任何2个数字都可以计算出平均数。</p>
+<p>为什么要用函数？</p>
+<p>函数可以把重复使用的程序块抽取出来，放到统一一个地方，然后在其他用到的地方重复调用。举个例子看一下，假设我们写个程序，要计算3次平均数，每次都是不同的两个数，如果不使用函数是类似这样代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">c = a + b</span><br><span class="line">d = c / <span class="number">2</span></span><br><span class="line">print(d)</span><br><span class="line"></span><br><span class="line">a = <span class="number">30</span></span><br><span class="line">b = <span class="number">40</span></span><br><span class="line"></span><br><span class="line">c = a + b</span><br><span class="line">d = c / <span class="number">2</span></span><br><span class="line">print(d)</span><br><span class="line"></span><br><span class="line">a = <span class="number">50</span></span><br><span class="line">b = <span class="number">60</span></span><br><span class="line"></span><br><span class="line">c = a + b</span><br><span class="line">d = c / <span class="number">2</span></span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<p>有没有看到计算平均数的代码在重复？</p>
+<p>现在看一下改成函数的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">average_two_numbers</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    c = a + b</span><br><span class="line">    d = c / <span class="number">2</span></span><br><span class="line">    print(d)</span><br><span class="line"></span><br><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br><span class="line">average_two_numbers(a, b)</span><br><span class="line"></span><br><span class="line">a = <span class="number">30</span></span><br><span class="line">b = <span class="number">40</span></span><br><span class="line">average_two_numbers(a, b)</span><br><span class="line"></span><br><span class="line">a = <span class="number">50</span></span><br><span class="line">b = <span class="number">60</span></span><br><span class="line">average_two_numbers(a, b)</span><br></pre></td></tr></table></figure>
+<p>现在有没有感觉代码清爽很多？可能还不够明显，如果计算平均数的代码有更多行，例如50行，感觉就会非常明显了，我们会把这50行都写在一个函数里，然后在使用时只需要一行代码调用这个函数就可以了，所以一个复杂的程序有了函数之后主程序也就是几段代码而已。</p>
+<p>这样代码会清晰易懂，而且更重要的是更容易维护，如果我们想改动计算平均数的方法，只需要改动函数里面的代码就可以，调用函数的地方不需要改动。</p>
+<p>举个现实中类似的例子，很多人都知道电脑上的 USB 接口，USB 接口其实就是定义了一个标准函数接口，规定了一些参数，只要符合 USB 接口的电子设备，比如鼠标、键盘等，可以插到 USB 接口使用，而这些电子设备本身可以多种多样，而且可以不断优化，只要按照 USB 接口的参数标准提供对外服务就可以。</p>
+<p>Python 语言本身已经提供了很多内嵌函数，我们可以直接拿来用，像在我们示例代码里经常用的 print 函数。</p>
+<p>我们在对象那一章节讲到的方法，其实也属于函数，只是方法一般是指一个对象本身的函数，也就是对象提供的可用函数，也一样可以有参数，有返回值。</p>
+<p>函数这一章是比较抽象困难的部分，但也是必须要理解学会的部分。如果读完了之后没有理解，可以多实践操作和上网查资料。可以参考一下之前对 print 函数的介绍，更加直观，方便理解。</p>
+<h2 id="5-2-函数定义和使用方法"><a href="#5-2-函数定义和使用方法" class="headerlink" title="5.2 函数定义和使用方法"></a>5.2 函数定义和使用方法</h2><p>最简单的函数定义是这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">empty_func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>上面这个函数实际上没有发挥作用，是个空函数，里面的 pass 指令是跳过的意思，什么也不做。</p>
+<p>我们看一下第一行 def empty_func(): 中的 def 是 Python 指令，后面的 empty_func 是我们给函数起的名字，后面的括号是指这个函数需要的参数，在这个例子里没有任何参数，所以括号里是空的，然后后面的冒号 : 跟以前的 if、for、while 等指令类似，是定义所属的程序块。</p>
+<p>看一下上一节中那个有意义点的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">average_two_numbers</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    c = a + b</span><br><span class="line">    d = c / <span class="number">2</span></span><br><span class="line">    print(d)</span><br></pre></td></tr></table></figure>
+<p>这个是定义一个名字叫 average_two_numbers 的函数，需要2个参数 a 和 b，里面的程序块是计算了 a 和 b 的平均数，并打印出来。</p>
+<p>函数还有一个重要的概念是返回值，我们上面的例子是在函数里直接打印出了平均数计算结果，还有一种更常用的方式是把计算结果返回，由调用该函数的程序来考虑怎样展示出来，而不是每次都是在函数里打印出来，这个打印函数是在命令行里输出的，而实际场景可能是在一个网页里显示，或者在一个手机APP界面里显示。</p>
+<p>我们看一下在函数里怎么用返回值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">average_two_numbers</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    c = a + b</span><br><span class="line">    d = c / <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> d</span><br><span class="line"></span><br><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br><span class="line">result = average_two_numbers(a, b)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+<p>从代码里可以看到，在函数程序块的最后一行 return d 是表示把计算结果返回，我们是把函数调用结果直接赋值给一个变量 result，然后再用 print(result) 打印出函数调用结果。</p>
+<h2 id="5-3-实践练习时间"><a href="#5-3-实践练习时间" class="headerlink" title="5.3 实践练习时间"></a>5.3 实践练习时间</h2><p>过去章节我们学习了函数的概念和使用方法，下面通过几个实践练习来加深理解。</p>
+<p>练习1：</p>
+<p>定义一个函数，名字是 sum_list，传一个数值列表参数 list1，函数计算列表里各数值的和，然后返回。在主程序里定义一个数值列表，包含 10、20、30 这几个数字，然后调用刚才定义的函数，用这个数值列表作为参数，用一个变量获取到函数返回结果，最后打印出来。</p>
+<p>（提示：这里的主程序就是用 python 程序文件名.py 命令时运行的程序代码，函数是属于主程序的一部分，但函数自己不会执行，需要被主程序调用后才能执行）</p>
+<p>练习2：</p>
+<p>定义一个函数，名字是 send_email，参数是 email 邮件地址和 content 邮件内容，函数里不进行实际的邮件发送操作，只是用 print 函数打印信息的方式模拟发送过程，先打印 “Connect to the email server…”，再打印 “Sending the email…”，再打印 “Sent successfully”。在主程序里使用这个函数。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/19/七天学会Python编程-04-第四章-循环遍历/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1846,168 +2035,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/10/16/Trying-TiDB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ken Deng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technology and Investing Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/16/Trying-TiDB/" itemprop="url">Trying TiDB</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-16T09:35:01+08:00">
-                2018-10-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/16/Trying-TiDB/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/16/Trying-TiDB/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="TiDB体验记录"><a href="#TiDB体验记录" class="headerlink" title="TiDB体验记录"></a>TiDB体验记录</h2><p>一直在寻找分布式数据库解决方案，有看过MyCat，MyCat是一个数据库中间层产品，通过数据库分区技术能提供一个理论上无限扩展的大数据库，背后核心还是MySQL，我感觉不是终极解决方案，但可以算作是过度方案。</p>
-<p>TiDB进入我的视野，觉得思路比较有趣，对外以MySQL 协议提供关系数据库存储服务，而核心是NoSQL技术实现分布式存储和分布式计算。先不看其核心部分，单从对外提供兼容 MySQL服务这个角度看，这是很聪明的选择，可以吸引庞大的MySQL用户群来尝试使用。</p>
-<p>我们已经基于MySQL开发了很多项目，目前面临的一个瓶颈是随着数据量越来越大，存储空间扩展方面和查询性能方面都面临比较大的问题。一台服务器的存储容量总归是有限的，如何能有效利用其他服务器的存储资源？还有计算资源等。</p>
-<p>一般场景下MySQL是搭建了主从环境，这意味着写数据时必须要写到主服务器上，其他从服务器可以同步到最新的数据。这样就可以通过查询从服务器实现读写分离，大大减轻主服务器的压力。</p>
-<p>但随着数据量不断增长，主服务器和从服务器的存储都会出现难以满足的情况，这时可能会考虑数据分区的方案把数据库分拆成多个，分别存储到不同服务器上，但这需要迁移大量数据，可能在考虑不周的情况下会多次迁移数据，这在数据量到一定规模时迁移数据耗时会很长。而且应用程序往往也要适应这种数据库分拆做改动，成本可能很高。</p>
-<p>有没有一种解决方案能弹性扩张数据库的存储资源和计算资源，也不需要复杂的数据分区以及改动相关应用程序？</p>
-<p>这就是TiDB 的解决方案，底层的数据存储和计算资源可以动态扩展，前端的数据访问服务是以兼容MySQL的协议开放出来，堪称完美。</p>
-<p>据TiDB官方介绍，他们在兼容MySQL方面花了相当的精力，据说是直接用MySQL的单元测试代码来测试他们的代码，保证完美兼容。</p>
-<p>我试着搭了一个有3个节点的TiDB环境，把我们一个系统的接口调用日志数据转移过去，并且进行实时写入。同时也开发了统计分析方面的查询，测试跟MySQL的兼容性和性能，总体评估感觉是挺理想的，后面还需要持续测试一段时间观察一下。</p>
-<p>根据TiDB官方网站上讲的，是希望满足100% OLTP数据库以及80%的OLAP数据库应用场景，这个目标是很有野心的，期待他们能达成，这样我们就可以有一个相当完美的数据库解决方案了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2058,7 +2085,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
