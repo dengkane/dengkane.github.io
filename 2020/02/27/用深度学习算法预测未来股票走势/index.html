@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,人工智能,AI," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近研究了一下用深度学习算法来预测股票未来的走势，看了网上不少别人分享的案例，也实际进行了测试，感觉用 LSTM 算法比较适用。长短期记忆网络（LSTM，Long Short-Term Memory）是一种时间循环神经网络，是为了解决一般的RNN（循环神经网络）存在的长期依赖问题而专门设计出来的，  看上面图感觉 LSTM 很深奥，其实简单理解是把过往基于时间序列的数据集跟预测目标数据做规律探索，">
+<meta name="keywords" content="机器学习,人工智能,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用深度学习算法预测未来股票走势">
+<meta property="og:url" content="https://dengkane.github.io/2020/02/27/用深度学习算法预测未来股票走势/index.html">
+<meta property="og:site_name" content="Technology and Investing Blog">
+<meta property="og:description" content="最近研究了一下用深度学习算法来预测股票未来的走势，看了网上不少别人分享的案例，也实际进行了测试，感觉用 LSTM 算法比较适用。长短期记忆网络（LSTM，Long Short-Term Memory）是一种时间循环神经网络，是为了解决一般的RNN（循环神经网络）存在的长期依赖问题而专门设计出来的，  看上面图感觉 LSTM 很深奥，其实简单理解是把过往基于时间序列的数据集跟预测目标数据做规律探索，">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://dengkane.github.io/images/LSTM-02.png">
+<meta property="og:image" content="https://dengkane.github.io/images/LSTM-03.png">
+<meta property="og:image" content="https://dengkane.github.io/images/LSTM-04.png">
+<meta property="og:image" content="https://dengkane.github.io/images/LSTM-05.png">
+<meta property="og:updated_time" content="2020-02-27T06:10:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用深度学习算法预测未来股票走势">
+<meta name="twitter:description" content="最近研究了一下用深度学习算法来预测股票未来的走势，看了网上不少别人分享的案例，也实际进行了测试，感觉用 LSTM 算法比较适用。长短期记忆网络（LSTM，Long Short-Term Memory）是一种时间循环神经网络，是为了解决一般的RNN（循环神经网络）存在的长期依赖问题而专门设计出来的，  看上面图感觉 LSTM 很深奥，其实简单理解是把过往基于时间序列的数据集跟预测目标数据做规律探索，">
+<meta name="twitter:image" content="https://dengkane.github.io/images/LSTM-02.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dengkane.github.io/2020/02/27/用深度学习算法预测未来股票走势/"/>
+
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?bec4a1afc552eae8162f2e24d4ce6f62";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>        
+
+
+  <title>用深度学习算法预测未来股票走势 | Technology and Investing Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Technology and Investing Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2020/02/27/用深度学习算法预测未来股票走势/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用深度学习算法预测未来股票走势</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-27T11:48:43+08:00">
+                2020-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/27/用深度学习算法预测未来股票走势/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2020/02/27/用深度学习算法预测未来股票走势/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近研究了一下用深度学习算法来预测股票未来的走势，看了网上不少别人分享的案例，也实际进行了测试，感觉用 LSTM 算法比较适用。长短期记忆网络（LSTM，Long Short-Term Memory）是一种时间循环神经网络，是为了解决一般的RNN（循环神经网络）存在的长期依赖问题而专门设计出来的，</p>
+<p><img src="/images/LSTM-02.png" alt="机器学习 深度学习 股票预测"></p>
+<p>看上面图感觉 LSTM 很深奥，其实简单理解是把过往基于时间序列的数据集跟预测目标数据做规律探索，LSTM 会结合比较久以前的数据（long）和最近的数据（short-term）做出综合判断，发现内在规律，形成预测模型。</p>
+<p>拿预测股票价格为例，我们可以把某只股票今天的收盘价作为预测目标，昨天开始一直往前 60 个交易日的收盘价格作为输入数据，也就是把前面 60 个收盘价作为机器学习的 X 输入，今天的收盘价是 y 输出。按这样的规律依次往前准备 X 和 y 数据，例如昨天的收盘价是一个新的 y，昨天之前 60 个交易日的收盘价作为一个新的 X。根据你能收集到的价格数据，可以准备出大量的 X 和 y，作为训练 LSTM 算法的数据。</p>
+<p>下面结合程序做详细解释。</p>
+<p><strong>1.引入需要的包</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> tushare <span class="keyword">as</span> ts   <span class="comment">#我们是使用 tushare 来下载股票数据</span></span><br></pre></td></tr></table></figure>
+<p><strong>2.下载股票数据</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ts.set_token(<span class="string">'xxx'</span>)   <span class="comment">#需要在 tushare 官网申请一个账号，然后得到 token 后才能通过数据接口获取数据</span></span><br><span class="line">pro = ts.pro_api()</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里是用 000001 平安银行为例，下载从 2015-1-1 到最近某一天的股价数据</span></span><br><span class="line">df = pro.daily(ts_code=‘<span class="number">000001.</span>SZ’, start_date=‘<span class="number">2015</span><span class="number">-01</span><span class="number">-01</span>’, end_date=‘<span class="number">2020</span><span class="number">-02</span><span class="number">-25</span>’)</span><br><span class="line"></span><br><span class="line">df.head()   <span class="comment">#用 df.head() 可以查看一下下载下来的股票价格数据，显示数据如下：</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/LSTM-03.png" alt="机器学习 深度学习 股票预测"></p>
+<p><strong>3.做数据准备</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把数据按时间调转顺序，最新的放后面，从 tushare 下载的数据是最新的在前面，为了后面准备 X,y 数据方便</span></span><br><span class="line">df = df.iloc[::<span class="number">-1</span>]</span><br><span class="line">df.reset_index(inplace=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#只用数据里面的收盘价字段的数据，也可以测试用更多价格字段作为预测输入数据</span></span><br><span class="line">training_set = df.loc[:, [<span class="string">'close'</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#只取价格数据，不要表头等内容</span></span><br><span class="line">training_set = training_set.values</span><br><span class="line"></span><br><span class="line"><span class="comment">#对数据做规则化处理，都按比例转成 0 到 1 之间的数据，这是为了避免真实数据过大或过小影响模型判断</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line">sc = MinMaxScaler(feature_range = (<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">training_set_scaled = sc.fit_transform(training_set)</span><br><span class="line"></span><br><span class="line"><span class="comment">#准备 X 和 y 数据，就类似前面解释的，先用最近一个交易日的收盘价作为第一个 y，然后这个交易日以前的 60 个交易日的收盘价作为 X。</span></span><br><span class="line"><span class="comment">#这样依次往前推，例如最近第二个收盘价是第二个 y，而最新第二个收盘价以前的 60 个交易日收盘价作为第二个 X，依次往前准备出大量的 X 和 y，用于后面的训练。</span></span><br><span class="line">X_train = []</span><br><span class="line">y_train = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>, len(training_set_scaled)):</span><br><span class="line">    X_train.append(training_set_scaled[i<span class="number">-60</span>:i])</span><br><span class="line">    y_train.append(training_set_scaled[i, training_set_scaled.shape[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">X_train, y_train = np.array(X_train), np.array(y_train)</span><br></pre></td></tr></table></figure>
+<p><strong>4.创建 LSTM 模型并训练</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这里是使用 Keras，Keras 大大简化了模型创建工作，背后的真正算法实现是用 TensorFlow 或其他。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> LSTM</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dropout</span><br><span class="line"></span><br><span class="line">regressor = Sequential()</span><br><span class="line"> </span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="keyword">True</span>, input_shape = (X_train.shape[<span class="number">1</span>], X_train.shape[<span class="number">2</span>])))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"> </span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="keyword">True</span>))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"> </span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="keyword">True</span>))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"></span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"></span><br><span class="line">regressor.add(Dense(units = <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">regressor.compile(optimizer = <span class="string">'adam'</span>, loss = <span class="string">'mean_squared_error'</span>)</span><br><span class="line"></span><br><span class="line">regressor.fit(X_train, y_train, epochs = <span class="number">100</span>, batch_size = <span class="number">32</span>)</span><br></pre></td></tr></table></figure>
+<p>整个训练过程需要持续一段时间，根据数据量的大小需要的训练时间也不同，界面输出大致如下：</p>
+<p><img src="/images/LSTM-04.png" alt="机器学习 深度学习 股票预测"></p>
+<p><strong>5.预测未来的价格</strong></p>
+<p>我们先获取用于预测的数据，比如拿到今天的收盘价后，再跟前面 59 个交易日的收盘价组成一个 X，然后用上面训练出来的模型进行预测 y 值，这个 y 值就是明天的预测股票价格。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tushare <span class="keyword">as</span> ts</span><br><span class="line"></span><br><span class="line">ts.set_token(<span class="string">'xxx'</span>)</span><br><span class="line">pro = ts.pro_api()</span><br><span class="line"></span><br><span class="line">df_test = pro.index_daily(ts_code=<span class="string">'000001.SZ'</span>, start_date=<span class="string">'2020-02-26'</span>, end_date=<span class="string">'2020-02-26'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#也是把数据调转顺序，最新的放后面</span></span><br><span class="line">df_test = df_test.iloc[::<span class="number">-1</span>]</span><br><span class="line">df_test.reset_index(inplace=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#只用 close 收盘价这个字段</span></span><br><span class="line">dataset_test = df_test.loc[:, [<span class="string">'close'</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#然后把测试数据和前面的训练数据整合到一起</span></span><br><span class="line">dataset_total = pd.concat( (df_test[[<span class="string">'close'</span>]]，df[[<span class="string">'close'</span>]]), axis = <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#也是只取具体数值，去掉表头等信息</span></span><br><span class="line">inputs = dataset_total[len(dataset_total) - len(dataset_test) - <span class="number">60</span>:].values</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里要按照特定的格式要求做一个数组变形，Keras 对数据格式有特定要求</span></span><br><span class="line">inputs = inputs.reshape(<span class="number">-1</span>, dataset_test.shape[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#对数据也要做一次规则化处理</span></span><br><span class="line">inputs = sc.transform(inputs)</span><br><span class="line"></span><br><span class="line">predicted_stock_price = []</span><br><span class="line"></span><br><span class="line"><span class="comment">#准备测试数据，就是把要测试的数据和以前训练的数据结合起来组装出要测试的 X，因为是要利用过去 60 个交易日的数据，只靠一个交易日的收盘价是不够的</span></span><br><span class="line">X_test = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>, <span class="number">60</span> + len(dataset_test)):</span><br><span class="line">    X_test.append(inputs[i<span class="number">-60</span>:i])</span><br><span class="line">X_test = np.array(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment">#对预测数据也做一次数组变形处理</span></span><br><span class="line">X_test = np.reshape(X_test, (X_test.shape[<span class="number">0</span>], X_test.shape[<span class="number">1</span>], dataset_test.shape[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#用前面训练的模型预测价格，得出来的是从 0 到 1 之间的规则化数值</span></span><br><span class="line">predicted_stock_price = regressor.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment">#再把规则化数据转回成正常的价格数据，现在就可以得出预测的下个交易日收盘价格</span></span><br><span class="line">predicted_stock_price = sc1.inverse_transform(predicted_stock_price)</span><br></pre></td></tr></table></figure>
+<p>如果把上面的预测过程再循环往未来做几次（把预测出来的下个交易日数据作为新的输入去预测再下一个交易日价格），可以预测出未来几天的股票价格，下面图可以示意出来。</p>
+<p><img src="/images/LSTM-05.png" alt="机器学习 深度学习 股票预测"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/09/为什么要用资产配置的思路做投资，用数字说话/" rel="next" title="为什么要用资产配置的思路做投资，用数字说话">
+                <i class="fa fa-chevron-left"></i> 为什么要用资产配置的思路做投资，用数字说话
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ken Deng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ken Deng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dengkane.github.io/2020/02/27/用深度学习算法预测未来股票走势/';
+          this.page.identifier = '2020/02/27/用深度学习算法预测未来股票走势/';
+          this.page.title = '用深度学习算法预测未来股票走势';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -269,6 +269,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2020/02/27/用深度学习算法预测未来股票走势/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/27/用深度学习算法预测未来股票走势/" itemprop="url">用深度学习算法预测未来股票走势</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-27T11:48:43+08:00">
+                2020-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/27/用深度学习算法预测未来股票走势/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2020/02/27/用深度学习算法预测未来股票走势/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近研究了一下用深度学习算法来预测股票未来的走势，看了网上不少别人分享的案例，也实际进行了测试，感觉用 LSTM 算法比较适用。长短期记忆网络（LSTM，Long Short-Term Memory）是一种时间循环神经网络，是为了解决一般的RNN（循环神经网络）存在的长期依赖问题而专门设计出来的，</p>
+<p><img src="/images/LSTM-02.png" alt="机器学习 深度学习 股票预测"></p>
+<p>看上面图感觉 LSTM 很深奥，其实简单理解是把过往基于时间序列的数据集跟预测目标数据做规律探索，LSTM 会结合比较久以前的数据（long）和最近的数据（short-term）做出综合判断，发现内在规律，形成预测模型。</p>
+<p>拿预测股票价格为例，我们可以把某只股票今天的收盘价作为预测目标，昨天开始一直往前 60 个交易日的收盘价格作为输入数据，也就是把前面 60 个收盘价作为机器学习的 X 输入，今天的收盘价是 y 输出。按这样的规律依次往前准备 X 和 y 数据，例如昨天的收盘价是一个新的 y，昨天之前 60 个交易日的收盘价作为一个新的 X。根据你能收集到的价格数据，可以准备出大量的 X 和 y，作为训练 LSTM 算法的数据。</p>
+<p>下面结合程序做详细解释。</p>
+<p><strong>1.引入需要的包</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> tushare <span class="keyword">as</span> ts   <span class="comment">#我们是使用 tushare 来下载股票数据</span></span><br></pre></td></tr></table></figure>
+<p><strong>2.下载股票数据</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ts.set_token(<span class="string">'xxx'</span>)   <span class="comment">#需要在 tushare 官网申请一个账号，然后得到 token 后才能通过数据接口获取数据</span></span><br><span class="line">pro = ts.pro_api()</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里是用 000001 平安银行为例，下载从 2015-1-1 到最近某一天的股价数据</span></span><br><span class="line">df = pro.daily(ts_code=‘<span class="number">000001.</span>SZ’, start_date=‘<span class="number">2015</span><span class="number">-01</span><span class="number">-01</span>’, end_date=‘<span class="number">2020</span><span class="number">-02</span><span class="number">-25</span>’)</span><br><span class="line"></span><br><span class="line">df.head()   <span class="comment">#用 df.head() 可以查看一下下载下来的股票价格数据，显示数据如下：</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/LSTM-03.png" alt="机器学习 深度学习 股票预测"></p>
+<p><strong>3.做数据准备</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把数据按时间调转顺序，最新的放后面，从 tushare 下载的数据是最新的在前面，为了后面准备 X,y 数据方便</span></span><br><span class="line">df = df.iloc[::<span class="number">-1</span>]</span><br><span class="line">df.reset_index(inplace=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#只用数据里面的收盘价字段的数据，也可以测试用更多价格字段作为预测输入数据</span></span><br><span class="line">training_set = df.loc[:, [<span class="string">'close'</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#只取价格数据，不要表头等内容</span></span><br><span class="line">training_set = training_set.values</span><br><span class="line"></span><br><span class="line"><span class="comment">#对数据做规则化处理，都按比例转成 0 到 1 之间的数据，这是为了避免真实数据过大或过小影响模型判断</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line">sc = MinMaxScaler(feature_range = (<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">training_set_scaled = sc.fit_transform(training_set)</span><br><span class="line"></span><br><span class="line"><span class="comment">#准备 X 和 y 数据，就类似前面解释的，先用最近一个交易日的收盘价作为第一个 y，然后这个交易日以前的 60 个交易日的收盘价作为 X。</span></span><br><span class="line"><span class="comment">#这样依次往前推，例如最近第二个收盘价是第二个 y，而最新第二个收盘价以前的 60 个交易日收盘价作为第二个 X，依次往前准备出大量的 X 和 y，用于后面的训练。</span></span><br><span class="line">X_train = []</span><br><span class="line">y_train = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>, len(training_set_scaled)):</span><br><span class="line">    X_train.append(training_set_scaled[i<span class="number">-60</span>:i])</span><br><span class="line">    y_train.append(training_set_scaled[i, training_set_scaled.shape[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">X_train, y_train = np.array(X_train), np.array(y_train)</span><br></pre></td></tr></table></figure>
+<p><strong>4.创建 LSTM 模型并训练</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这里是使用 Keras，Keras 大大简化了模型创建工作，背后的真正算法实现是用 TensorFlow 或其他。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> LSTM</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dropout</span><br><span class="line"></span><br><span class="line">regressor = Sequential()</span><br><span class="line"> </span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="keyword">True</span>, input_shape = (X_train.shape[<span class="number">1</span>], X_train.shape[<span class="number">2</span>])))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"> </span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="keyword">True</span>))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"> </span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>, return_sequences = <span class="keyword">True</span>))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"></span><br><span class="line">regressor.add(LSTM(units = <span class="number">50</span>))</span><br><span class="line">regressor.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"></span><br><span class="line">regressor.add(Dense(units = <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">regressor.compile(optimizer = <span class="string">'adam'</span>, loss = <span class="string">'mean_squared_error'</span>)</span><br><span class="line"></span><br><span class="line">regressor.fit(X_train, y_train, epochs = <span class="number">100</span>, batch_size = <span class="number">32</span>)</span><br></pre></td></tr></table></figure>
+<p>整个训练过程需要持续一段时间，根据数据量的大小需要的训练时间也不同，界面输出大致如下：</p>
+<p><img src="/images/LSTM-04.png" alt="机器学习 深度学习 股票预测"></p>
+<p><strong>5.预测未来的价格</strong></p>
+<p>我们先获取用于预测的数据，比如拿到今天的收盘价后，再跟前面 59 个交易日的收盘价组成一个 X，然后用上面训练出来的模型进行预测 y 值，这个 y 值就是明天的预测股票价格。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tushare <span class="keyword">as</span> ts</span><br><span class="line"></span><br><span class="line">ts.set_token(<span class="string">'xxx'</span>)</span><br><span class="line">pro = ts.pro_api()</span><br><span class="line"></span><br><span class="line">df_test = pro.index_daily(ts_code=<span class="string">'000001.SZ'</span>, start_date=<span class="string">'2020-02-26'</span>, end_date=<span class="string">'2020-02-26'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#也是把数据调转顺序，最新的放后面</span></span><br><span class="line">df_test = df_test.iloc[::<span class="number">-1</span>]</span><br><span class="line">df_test.reset_index(inplace=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#只用 close 收盘价这个字段</span></span><br><span class="line">dataset_test = df_test.loc[:, [<span class="string">'close'</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#然后把测试数据和前面的训练数据整合到一起</span></span><br><span class="line">dataset_total = pd.concat( (df_test[[<span class="string">'close'</span>]]，df[[<span class="string">'close'</span>]]), axis = <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#也是只取具体数值，去掉表头等信息</span></span><br><span class="line">inputs = dataset_total[len(dataset_total) - len(dataset_test) - <span class="number">60</span>:].values</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里要按照特定的格式要求做一个数组变形，Keras 对数据格式有特定要求</span></span><br><span class="line">inputs = inputs.reshape(<span class="number">-1</span>, dataset_test.shape[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#对数据也要做一次规则化处理</span></span><br><span class="line">inputs = sc.transform(inputs)</span><br><span class="line"></span><br><span class="line">predicted_stock_price = []</span><br><span class="line"></span><br><span class="line"><span class="comment">#准备测试数据，就是把要测试的数据和以前训练的数据结合起来组装出要测试的 X，因为是要利用过去 60 个交易日的数据，只靠一个交易日的收盘价是不够的</span></span><br><span class="line">X_test = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>, <span class="number">60</span> + len(dataset_test)):</span><br><span class="line">    X_test.append(inputs[i<span class="number">-60</span>:i])</span><br><span class="line">X_test = np.array(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment">#对预测数据也做一次数组变形处理</span></span><br><span class="line">X_test = np.reshape(X_test, (X_test.shape[<span class="number">0</span>], X_test.shape[<span class="number">1</span>], dataset_test.shape[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#用前面训练的模型预测价格，得出来的是从 0 到 1 之间的规则化数值</span></span><br><span class="line">predicted_stock_price = regressor.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment">#再把规则化数据转回成正常的价格数据，现在就可以得出预测的下个交易日收盘价格</span></span><br><span class="line">predicted_stock_price = sc1.inverse_transform(predicted_stock_price)</span><br></pre></td></tr></table></figure>
+<p>如果把上面的预测过程再循环往未来做几次（把预测出来的下个交易日数据作为新的输入去预测再下一个交易日价格），可以预测出未来几天的股票价格，下面图可以示意出来。</p>
+<p><img src="/images/LSTM-05.png" alt="机器学习 深度学习 股票预测"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2019/09/09/为什么要用资产配置的思路做投资，用数字说话/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1701,164 +1874,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2019/06/20/分享一个我很久以前投资美股的经历/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ken Deng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technology and Investing Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/20/分享一个我很久以前投资美股的经历/" itemprop="url">分享一个我很久以前投资美股的经历</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-20T14:58:37+08:00">
-                2019-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/投资/" itemprop="url" rel="index">
-                    <span itemprop="name">投资</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/20/分享一个我很久以前投资美股的经历/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/06/20/分享一个我很久以前投资美股的经历/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/stock-exchange-738671_640.jpg" alt="美股 投资策略"></p>
-<p>以前我很喜欢研究巴菲特的投资策略，并且在投资美股中不断实践。后来我基本掌握了对上市公司的估值方法，是基于财务数据做计算的，寻找投资机会时会先计算一下股票对应公司的估值，然后看股票价格跟估值间的差距怎么样，这就是评估安全边际。</p>
-<p>当时我对IT类企业比较有兴趣，因为自己就是从事IT行业的，就比较关注几家软件开发方面的公司，有留意到印度的一家做软件外包的公司。分析其财务数据很不错，股票价格远低于估值，安全边际足够大，就投入了较大比例的资金，信心十足，记得当时买进时股价是12美元左右。</p>
-<p>持有几个月后，有一天晚上美股开市时，这个股票的价格在开盘时从十几美元变成2美元，我当时懵了，心里想是不是交易软件搞错价格了。但经过一番研究才知道是这个公司财务数据造假，导致股票被抛售，甚至被做空，一夜之间缩水幅度之大令人目瞪口呆。我当时资金不多，突遭这样的损失感觉深受打击，可能就是从那时开始，我开始留意指数方面的投资，也就是买指数ETF，刚开始的出发点是避免个股的这种巨大的波动风险。</p>
-<p>我们不是巴菲特，学识、经验和阅历都差得太远，估计巴菲特能从这家公司的财务数据中看出蹊跷来，避免投资它，但我们可能就看不出来。</p>
-<p>我现在投资美股都是选择股指ETF，例如标准普尔指数ETF SPY 和纳斯达克指数ETF QQQ，从波动率角度看比个股低很多，更重要的是不用担心踩雷。还有一个重要原因是，股指会定期剔除已经落伍的上市公司，总是保持一个能跟随时代发展的股票组合，这样能有效避免投资到一些夕阳产业的公司导致亏损。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1909,7 +1924,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1968,7 +1983,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
