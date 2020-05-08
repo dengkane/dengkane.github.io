@@ -269,6 +269,333 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2019/02/15/对分布式数据库的实验和思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/15/对分布式数据库的实验和思考/" itemprop="url">对分布式数据库的实验和思考</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-15T09:42:35+08:00">
+                2019-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/15/对分布式数据库的实验和思考/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/15/对分布式数据库的实验和思考/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/d-db.jpg" alt="分布式 数据库"></p>
+<h3 id="分布式数据库介绍"><a href="#分布式数据库介绍" class="headerlink" title="分布式数据库介绍"></a>分布式数据库介绍</h3><p>过去一段时间有研究分布式数据库，什么是分布式数据库呢？</p>
+<p>分布式数据库区别于常见的主从架构数据库集群，首先数据存储是分布式的，分开存储在多台服务器上，但数据访问服务还是跟集中式类似，一般都有统一的访问入口。</p>
+<p>一般常见的 MySQL 主从集群，是先有一个主服务实例，写数据操作一般是通过这个主服务实例完成的，然后会有多个从服务实例，是从主服务实例自动同步数据过来，从服务实例可以对外提供数据查询服务，一般不用于写数据操作。</p>
+<p>这种主从架构一个比较大的问题是在数据量很大的时候，在存储方面难以满足需要，比如每天写入100G的数据，这么多数据首先要有足够的硬盘空间，还要有足够的网络带宽用于主从服务间同步数据。一般一台服务器能配置的硬盘空间是有限的，不太可能做到无限扩容，只能考虑分布式存储技术，也就是通过增加服务器的方式使存储空间做到水平扩展。这种扩展是存储层面的，可以通过例如 Hadoop 这种大数据技术实现一种分布式文件系统，然后挂载到服务器上当作硬盘空间来使用。</p>
+<p>而分布式数据库是从更高层面来解决上面的问题，数据是分开存放在多个服务实例上，这些服务实例可能使用普通的硬盘来存储数据，也可能使用分布式文件系统存储数据。比如有100条数据，有5个服务实例，可能每个服务实例保存了20条。这些服务实例也有机制来相互备份，通过多复本冗余存储的方式来做到数据高可用。</p>
+<p>这种多服务实例需要解决协调调度的问题，比如写入数据时应该写到哪个服务实例上，读数据时怎样能读取到所有的数据，或者怎么知道某条数据是存在哪个服务实例上。所以一般分布式数据库系统都有个用于协调和调度资源的服务，它就是用来解决读写数据时的资源调度问题。</p>
+<h3 id="TiDB-介绍"><a href="#TiDB-介绍" class="headerlink" title="TiDB 介绍"></a>TiDB 介绍</h3><p>我测试了 TiDB 这个分布式数据库系统，它的分布式存储层叫 TiKV，是一个基于 Key-Value 机制的分布式存储系统。它的资源调度服务叫作 PD，就是用于协调数据访问服务的，PD 会告诉你写数据时写到哪个 TiKV 实例上，读数据时要从哪个 TiKV 实例上读。</p>
+<p>TiDB 比较牛的一方面是提供了一套兼容 MySQL 协议的关系数据库层，让你可以用 MySQL 的 SQL 语法来访问数据，这就大大提高了实用性，让很多已有的基于 MySQL 的应用系统可以很平滑的迁移过来。</p>
+<p>我是用 TiDB 来保存 ESB 平台的 API 调用日志记录，每天经常高达100万条记录以上，以前用 MySQL 保存时因为数据都是保存在一台服务器上，硬盘空间很快就满了，总是扩容硬盘空间又不现实，所以用上 TiDB 就解决了分布式存储的问题，我们用3台服务器，每台分担1/3的存储空间，而且可以追加服务器，来进一步分散，减少单台服务器的存储空间要求。</p>
+<p>在使用过程中，随着数据量越来越大，发现性能方面出现问题了，首先是查询数据时，因为单表记录数已经几亿级别了，每次查询都感觉比较慢，而且查询时 CPU 占用很高，导致数据写入方面也变慢，整体日志记录和查询服务的体验不太好。初步分析应该是在数据量到一定程度后，PD 分布式资源调度服务很繁忙，需要不断从各 TiKV 服务读取数据，比较容易导致服务器负荷增大。</p>
+<h3 id="轻量数据库解决方案"><a href="#轻量数据库解决方案" class="headerlink" title="轻量数据库解决方案"></a>轻量数据库解决方案</h3><p>后来就思考其他解决方案，这种日志保存对数据一致性要求不高，主要是提供汇总数据，用于跟踪 ESB 平台的总体服务情况。我就考虑按每天一张表的方式来保存，查询时也按天，因为看到 TiDB 对 CPU 占用过高，就想用其他小型数据库来代替，存储方面最好能每天一个数据库文件，能压缩起来，方便移动到其他服务器上，解决分布式存储问题。</p>
+<p>根据以前的使用经验，我选择了 HSQLDB，这个是兼容标准 SQL 语法的一种小型数据库，可以内嵌到应用系统里，可以以一个文件的方式保存一个数据库。我们就把每天的 API 调用记录保存到一个数据文件，并压缩来节约硬盘空间，随时可以转移到其他服务器上。实际测试这种方案效果很好，用单台服务器就能满足以前几台服务器才能做的工作，而且服务器 CPU 负荷很低，响应很快。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总结一下上面的经历，个人感觉分布式数据库系统也并非是万能的，它们也有自己的弱点，估计需要很大的服务器资源投入才能保证较好的数据服务，比如 Hadoop 大数据平台，动辄需要几十台服务器的环境，资源投入很大。而对于一些非关键型的应用场景，一些简单的解决方案可能更适合，所以要根据实际需要选择恰当的解决方案。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2019/01/15/可靠而且低成本的贷款渠道/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ken Deng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technology and Investing Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/15/可靠而且低成本的贷款渠道/" itemprop="url">可靠而且低成本的贷款渠道</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-15T10:54:59+08:00">
+                2019-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/融资/" itemprop="url" rel="index">
+                    <span itemprop="name">融资</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/15/可靠而且低成本的贷款渠道/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/15/可靠而且低成本的贷款渠道/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/payment-3411414_640.jpg" alt="贷款 融资 信用卡"></p>
+<p>很多人都会有紧急需要资金的需求，比如突然的大额消费，一时你手上可能没有足够的资金，这时就需要贷款渠道了。可能有人想到找亲戚朋友借钱，其实这种借钱可能成本更高，因为会消耗亲情或友情分。</p>
+<p>因此我比较鼓励你去找合适的贷款途径，这里推荐几种低成本的贷款渠道。</p>
+<h2 id="信用卡"><a href="#信用卡" class="headerlink" title="信用卡"></a>信用卡</h2><p>首先是尽量用信用卡去消费，信用卡普遍都有免息期，经常长达50天，免息期内相当于银行免费借钱给你用。这里并不是鼓励你多消费，只是建议在你有必要消费时尽量先用信用卡，而且优先使用免息期最长的那张信用卡 (这里是假设你有多张信用卡)。跟信用卡类似还有阿里的花呗和京东的白条等，建议不要轻易分期，除非能免手续费。</p>
+<p>教你一个选择最长免息期的简单办法，从账单日第二天开始一个星期内刷信用卡能享受最长免息期。还有个简单方法是安装一个叫 “51信用卡管家” 的 APP，能自动帮你计算免息期。</p>
+<h2 id="银行渠道"><a href="#银行渠道" class="headerlink" title="银行渠道"></a>银行渠道</h2><p>然后是银行贷款渠道，工商银行的消费贷款利息比较低，那个业务叫融e贷，可以优先考虑。工行还有一个自动分期的信用卡，利率也很低，但建议设置默认分期期数不要超过24期，也就是两年。工行的工作人员会建议你默认5年分期，这样你付出的利息会比较高，但还是远低于其他银行，可以称得上是业界良心。</p>
+<h2 id="互联网贷款"><a href="#互联网贷款" class="headerlink" title="互联网贷款"></a>互联网贷款</h2><p>最后就是支付宝的借呗和微信的微粒贷，他们的借款利率通常是每天万分之5左右，不同人的利率会有差异，而且经常有优惠活动可以参加，优惠活动的利率经常可以到万分之3。</p>
+<p>借呗和微粒贷也是分期还款的，综合计算下来年化实际利率经常能到10%，建议分期期数不要太多，一般12期左右就可以了。</p>
+<p>再有就是一些互联网小贷了，我建议你轻易不要去用，他们的利率普遍是非常高的，可能会超出很多人的想象。优先考虑上面推荐的几个渠道吧。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2019/01/14/推荐一种有趣的投资方式，轻松获取被动收入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1553,327 +1880,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/21/靠这个简单的投资组合策略你也可以实现财务自由/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ken Deng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technology and Investing Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/21/靠这个简单的投资组合策略你也可以实现财务自由/" itemprop="url">靠这个简单的投资组合策略你也可以实现财务自由</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-21T09:03:53+08:00">
-                2018-11-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/投资/" itemprop="url" rel="index">
-                    <span itemprop="name">投资</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/21/靠这个简单的投资组合策略你也可以实现财务自由/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/21/靠这个简单的投资组合策略你也可以实现财务自由/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/piggy-bank-850607_640.jpg" alt="piggy bank"></p>
-<h2 id="你炒股吗？赚钱了吗？这种问题可能会刺激到你。"><a href="#你炒股吗？赚钱了吗？这种问题可能会刺激到你。" class="headerlink" title="你炒股吗？赚钱了吗？这种问题可能会刺激到你。"></a>你炒股吗？赚钱了吗？这种问题可能会刺激到你。</h2><p>根据统计数据，10个炒股的人中一般只有一个是真正赚了钱的，有2个是打平的，没赚也没赔，而有8个是赔钱的。是不是感觉挺惊讶?</p>
-<p>为什么大部分人不能从股市赚到钱? 主要因为人性的两个缺点：贪婪和恐惧。怎么讲呢，当有好的投资机会时你往往怕亏钱，所以不敢投，这就是恐惧。而当股市火热大家都情绪高涨时，你往往担心错过赚钱机会就赶紧投钱进股市。其实真正从股市赚钱的人是在大家都害怕的时候勇于进场，大家都狂热的时候要及时退出。</p>
-<p>有个说法是说成功的投资是反人性的。你现在能理解为什么大部分人炒股都不赚钱了吧？</p>
-<h2 id="那有什么简单的投资策略能让你稳定赚钱吗？"><a href="#那有什么简单的投资策略能让你稳定赚钱吗？" class="headerlink" title="那有什么简单的投资策略能让你稳定赚钱吗？"></a>那有什么简单的投资策略能让你稳定赚钱吗？</h2><p>这里要介绍的这个投资组合策略就能做到，而且能帮你避免大部分人都会犯的错误。</p>
-<p>把你准备投资的钱平均分为两份，用一半去买股指ETF基金，另一半去买货币基金(余额宝背后就是货币基金)，每隔半年调平两边。例如你总共投了1万元，平均分为两份，5000买300ETF基金，5000买余额宝，6个月后股票基金涨到8000，余额宝涨到5100，卖出一部分股票，买进一部分余额宝，使两边都平衡到 6550。</p>
-<h2 id="整个策略讲完了，是不是很简单？"><a href="#整个策略讲完了，是不是很简单？" class="headerlink" title="整个策略讲完了，是不是很简单？"></a>整个策略讲完了，是不是很简单？</h2><p>你可能怀疑这个策略的可行性，我先从历史数据角度讲讲，国内有专业人士用过去几十年的股市数据做过测试，年化收益率超过10%，虽然经历了多次牛市熊市周期。(想去看测试数据的可以找雪球股票社区出版的《傻瓜式投资》这本书。) 美国股市的历史数据也可以证明这个策略是有效的，年化收益率也在10%左右。其实拉长时间周期来看股市都是逐步上涨的，这个是投资赚钱的一个大前提。</p>
-<p>我另外从解决人性那两个问题角度讲讲，这个策略会在股市下跌时让你转移货币基金里的资金到股票里，因为要平衡两边，这是帮助你克服恐惧心理，在股市低位时勇于进场。而在股市火热的时候让你卖出转到货币基金里，及时获利，也是为了平衡两边。长期下来，始终处于占优势的一边，所以好的收益也是可以预期的。</p>
-<p><img src="/images/analytics-3265840_640.jpg" alt="investing life"></p>
-<h2 id="那怎样靠这个策略实现财务自由呢？"><a href="#那怎样靠这个策略实现财务自由呢？" class="headerlink" title="那怎样靠这个策略实现财务自由呢？"></a>那怎样靠这个策略实现财务自由呢？</h2><p>财务自由并非是指大富大贵，而是你的被动收入足够覆盖你的生活开销。这里存在一个平衡，一方面是要有足够的被动收入，另一方面是控制生活开销不要超过被动收入。</p>
-<p>假设你经过多年的积累，你的投资资金达到50万以上，按照年化10%的收益率，每年可以有5万元投资被动收入，这应该足以在国内中小城市生活了，这就可以称作是财务自由了。这种状态下你可以选择去做你喜欢的工作，而不是为了生存去工作。</p>
-<p>这个策略简单易行，你用支付宝就可以建立这个投资组合，一半资金买300ETF基金，一半资金放在余额宝，每隔半年平衡一下。平衡的频率不要太高，是为了给市场足够的时间，比如牛市时希望股票抓到大部分涨幅后再平衡，熊市时股票跌得差不多后再平衡。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dengkane.github.io/2018/11/20/区块链应用场景介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ken Deng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technology and Investing Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/20/区块链应用场景介绍/" itemprop="url">区块链应用场景介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T09:06:07+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/20/区块链应用场景介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/20/区块链应用场景介绍/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>过去几年区块链在虚拟货币领域应用比较广泛，其实只是说明区块链技术适合于发行虚拟货币，但不能说虚拟货币就是区块链，区块链的应用领域要广泛得多。而虚拟货币用其他技术也能实现，但基于区块链技术能够使很多人愿意加入区块链节点网络，贡献自己的算力和存储资源。</p>
-<p>区块链的核心是防篡改防伪造的分布式账本，理论上讲数据是只可以新增，不允许更改，而且新增的时候是按照规则跟已有的区块链接到一起。还有很重要的一点是区块链的数据是分布式存储的，不是传统的中央式架构。</p>
-<p>这种技术可以应用在需要信任机制的场景里，例如跟商业合作伙伴对账方面，供应商发货和我方付款信息都可以记录在区块链上，而且记录时有严格地授权机制，也就是说供应商只能记录跟他们相关的数据，我方只能记录跟我方相关的数据。这主要是应用了数字签名技术。再加上智能合约技术可以实现商业流程的自动处理，能大大提高商业协作效率。</p>
-<p>还有像常见的会员系统，过去大多是基于传统关系型数据库搭建的，而且是被掌控在商家手里，理论上说数据库里的数据可以任意更改，会员的权益是很难保证的，说得难听点就是商家说你有多少积分你就有多少积分，因此先天就难以得到消费者的信任。而基于区块链技术搭建的会员体系先天就具有被信任的基础，上链的数据不可篡改，而且可以公开数据，积分权益可以得到有效保障。当然积分对应有多少实质性权益还是取决于商家，区块链解决的是一套可靠记账体系。</p>
-<p>有了可靠的信任机制，很多涉及多方的行为就比较容易进行了，因为违约行为是公开可查的，为了长远利益，大多数人都不会冒这种风险。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1924,7 +1930,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
